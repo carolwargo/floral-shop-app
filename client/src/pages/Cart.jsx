@@ -1,8 +1,10 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext.jsx';
 
 function Cart() {
   const { cart } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -20,6 +22,7 @@ function Cart() {
             </div>
           ))}
           <p>Grand Total: ${cart.items.reduce((sum, item) => sum + item.productId.price * item.quantity, 0).toFixed(2)}</p>
+          <button onClick={() => navigate('/checkout')}>Proceed to Checkout</button>
         </div>
       )}
     </div>
