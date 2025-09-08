@@ -20,18 +20,29 @@ function CheckoutForm() {
     const fetchClientSecret = async () => {
       try {
         const token = localStorage.getItem('token');
+        if (!token) {
+          setError('Please log in again');
+          navigate('/login');
+          return;
+        }
         const res = await axios.post(
           'http://localhost:5000/api/payments/create-payment-intent',
-          {},
+          { amount: 5998, currency: 'usd' }, // Send amount explicitly
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setClientSecret(res.data.clientSecret);
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to initialize payment');
+        if (err.response?.status === 401) {
+          localStorage.removeItem('token');
+          navigate('/login');
+        }
       }
     };
-    fetchClientSecret();
-  }, []);
+    if (cart.items.length > 0) {
+      fetchClientSecret();
+    }
+  }, [cart, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +68,10 @@ function CheckoutForm() {
       navigate('/cart');
     }
   };
+
+  if (!clientSecret && !error) {
+    return <div>Loading payment form...</div>;
+  }
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
