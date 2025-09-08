@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { loadStripe } from '@stripe/stripe-js';
@@ -16,46 +16,52 @@ function CheckoutForm() {
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchClientSecret = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          setError('Please log in again');
-          navigate('/login');
-          return;
-        }
-        const res = await axios.post(
-          'http://localhost:5000/api/payments/create-payment-intent',
-          { amount: 5998, currency: 'usd' }, // Send amount explicitly
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setClientSecret(res.data.clientSecret);
-      } catch (err) {
-        setError(err.response?.data?.message || 'Failed to initialize payment');
-        if (err.response?.status === 401) {
-          localStorage.removeItem('token');
-          navigate('/login');
-        }
+  const fetchClientSecret = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Please log in again');
+        navigate('/login');
+        return null;
       }
-    };
-    if (cart.items.length > 0) {
-      fetchClientSecret();
+      const res = await axios.post(
+        'http://localhost:5000/api/payments/create-payment-intent',
+        { amount: 5998, currency: 'usd' },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return res.data.clientSecret;
+    } catch (err) {
+      if (err.response?.status === 401) {
+        setError('Session expired. Please log in again.');
+        localStorage.removeItem('token');
+        navigate('/login');
+      } else {
+        setError(err.response?.data?.message || 'Failed to initialize payment');
+      }
+      return null;
     }
-  }, [cart, navigate]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setProcessing(true);
 
-    if (!stripe || !elements || !clientSecret) {
+    if (!stripe || !elements) {
       setError('Payment system not ready');
       setProcessing(false);
       return;
     }
 
+    // Fetch a fresh clientSecret
+    const newClientSecret = await fetchClientSecret();
+    if (!newClientSecret) {
+      setProcessing(false);
+      return;
+    }
+    setClientSecret(newClientSecret);
+
     const cardElement = elements.getElement(CardElement);
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+    const { error, paymentIntent } = await stripe.confirmCardPayment(newClientSecret, {
       payment_method: { card: cardElement },
     });
 
@@ -68,10 +74,6 @@ function CheckoutForm() {
       navigate('/cart');
     }
   };
-
-  if (!clientSecret && !error) {
-    return <div>Loading payment form...</div>;
-  }
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
