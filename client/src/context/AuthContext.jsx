@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser({ email });
-      await fetchCart(token); // Pass token directly
+      await fetchCart(token);
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
       console.error('Login error:', err);

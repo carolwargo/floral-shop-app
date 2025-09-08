@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log('Decoded token:', decoded);
-    const user = await User.findById(decoded.userId || decoded._id); // Handle both userId and _id
+    const user = await User.findById(decoded._id); // Use _id only
     if (!user) {
       return res.status(401).json({ error: 'User not found' });
     }

@@ -1,3 +1,4 @@
+//server/index.js
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 console.log('STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY ? 'Loaded' : 'Not loaded');

@@ -6,7 +6,7 @@ const auth = require('../middleware/authMiddleware');
 
 router.get('/', auth, async (req, res) => {
   try {
-    console.log('Cart request user:', req.user); // Debug user
+    console.log('Cart request user:', req.user);
     let cart = await Cart.findOne({ userId: req.user._id }).populate('items.productId');
     if (!cart) {
       cart = new Cart({ userId: req.user._id, items: [] });
