@@ -9,7 +9,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log('Login attempt:', { email }); // Debug
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email: email.toLowerCase() }).lean(); // Use .lean() for plain object
     if (!user) {
       console.log('User not found:', email);
       return res.status(401).json({ error: 'Invalid credentials' });
@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     const token = jwt.sign(
-      { _id: user._id, email: user.email, isAdmin: user.isAdmin },
+      { _id: user._id, email: user.email, isAdmin: user.isAdmin || false },
       process.env.JWT_SECRET || 'your_jwt_secret',
       { expiresIn: '1h' }
     );
