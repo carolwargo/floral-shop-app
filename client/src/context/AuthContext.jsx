@@ -1,3 +1,4 @@
+// client/src/context/AuthContext.jsx
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -6,65 +7,60 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState({ items: [] });
-
-  const signup = async (email, password, name) => {
-    const res = await axios.post('http://localhost:5000/api/auth/signup', { email, password, name });
-    setUser(res.data.user);
-    localStorage.setItem('token', res.data.token);
-  };
+  const [error, setError] = useState(null);
 
   const login = async (email, password) => {
-    const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-    setUser(res.data.user);
-    localStorage.setItem('token', res.data.token);
-    await fetchCart();
-  };
-
-  const logout = () => {
-    setUser(null);
-    setCart({ items: [] });
-    localStorage.removeItem('token');
-  };
-
-  const fetchCart = async () => {
     try {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const res = await axios.get('http://localhost:5000/api/cart', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setCart(res.data);
-      }
-    } catch (error) {
-      console.error('Fetch cart error:', error);
+      setError(null);
+      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const { token } = res.data;
+      console.log('Login token:', token);
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser({ email });
+      await fetchCart(token); // Pass token directly
+    } catch (err) {
+      setError(err.response?.data?.error || 'Login failed');
+      console.error('Login error:', err);
     }
   };
 
-  const addToCart = async (productId, quantity) => {
+  const fetchCart = async (token) => {
     try {
-      const token = localStorage.getItem('token');
-      const res = await axios.post(
-        'http://localhost:5000/api/cart/add',
-        { productId, quantity },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const authToken = token || localStorage.getItem('token');
+      console.log('Fetching cart with token:', authToken);
+      if (!authToken) {
+        throw new Error('No token found');
+      }
+      const res = await axios.get('http://localhost:5000/api/cart', {
+        headers: { Authorization: `Bearer ${authToken}` }
+      });
       setCart(res.data);
-    } catch (error) {
-      console.error('Add to cart error:', error);
-      alert(error.response?.data?.message || 'Failed to add to cart');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to fetch cart');
+      console.error('Fetch cart error:', err);
     }
   };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setUser({}); // Placeholder; fetch user data if needed
-      fetchCart();
+      console.log('Initial token:', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      fetchCart(token);
     }
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('token');
+    delete axios.defaults.headers.common['Authorization'];
+    setUser(null);
+    setCart({ items: [] });
+    setError(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, cart, signup, login, logout, addToCart }}>
+    <AuthContext.Provider value={{ user, cart, error, login, logout, fetchCart }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,10 +1,22 @@
 // server/routes/cartRoutes.js
 const express = require('express');
 const router = express.Router();
-const { getCart, addToCart } = require('../controllers/cartController');
-const authMiddleware = require('../middleware/authMiddleware');
+const Cart = require('../models/Cart');
+const auth = require('../middleware/authMiddleware');
 
-router.get('/', authMiddleware, getCart);
-router.post('/add', authMiddleware, addToCart);
+router.get('/', auth, async (req, res) => {
+  try {
+    console.log('Cart request user:', req.user); // Debug user
+    let cart = await Cart.findOne({ userId: req.user._id }).populate('items.productId');
+    if (!cart) {
+      cart = new Cart({ userId: req.user._id, items: [] });
+      await cart.save();
+    }
+    res.json(cart);
+  } catch (error) {
+    console.error('Cart fetch error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;

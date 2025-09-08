@@ -6,6 +6,7 @@ import Home from './pages/Home.jsx';
 import Shop from './pages/Shop.jsx';
 import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
+import OrderHistory from './pages/OrderHistory.jsx';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-history" element={<OrderHistory />} />
       </Routes>
     </Router>
   );
