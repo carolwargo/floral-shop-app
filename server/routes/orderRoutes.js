@@ -4,13 +4,13 @@ const router = express.Router();
 const Order = require('../models/Order');
 const auth = require('../middleware/authMiddleware');
 
-router.get('/history', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.user._id })
-      .populate('items.productId')
-      .sort({ createdAt: -1 });
+    console.log('Order request user:', req.user);
+    const orders = await Order.find({ userId: req.user._id }).populate('items.productId');
     res.json(orders);
   } catch (error) {
+    console.error('Order fetch error:', error);
     res.status(500).json({ error: error.message });
   }
 });
