@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Order = require('../models/Order');
-const auth = require('../middleware/authMiddleware');
+const { auth } = require('../middleware/auth'); // ✅ FIXED
 
 router.post('/create-payment-intent', auth, async (req, res) => {
   try {
@@ -11,6 +11,7 @@ router.post('/create-payment-intent', auth, async (req, res) => {
     if (!amount) {
       return res.status(400).json({ error: 'Amount is required' });
     }
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: parseInt(amount),
       currency,

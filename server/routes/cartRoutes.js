@@ -1,9 +1,11 @@
 // server/routes/cartRoutes.js
+// server/routes/cartRoutes.js
 const express = require('express');
 const router = express.Router();
 const Cart = require('../models/Cart');
-const auth = require('../middleware/authMiddleware');
+const { auth } = require('../middleware/auth'); // ✅ destructure the function
 
+// GET cart for logged-in user
 router.get('/', auth, async (req, res) => {
   try {
     console.log('Cart request user:', req.user);

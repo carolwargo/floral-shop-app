@@ -1,69 +1,60 @@
 // server/routes/productRoutes.js
+// server/routes/productRoutes.js
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
-const auth = require('../middleware/authMiddleware');
+const { auth, admin } = require('../middleware/auth'); // ✅ import both
 
+// Public: get all products
 router.get('/', async (req, res) => {
   try {
-    const { search } = req.query;
-    const query = search ? { name: { $regex: search, $options: 'i' } } : {};
-    const products = await Product.find(query);
+    const products = await Product.find();
     res.json(products);
   } catch (error) {
-    console.error('Product fetch error:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
-router.post('/', auth, async (req, res) => {
+// Public: get a single product by ID
+router.get('/:id', async (req, res) => {
   try {
-    if (!req.user.isAdmin) {
-      return res.status(403).json({ error: 'Admin access required' });
-    }
-    const { name, price, image, description, stock } = req.body;
-    const product = new Product({ name, price, image, description, stock });
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Protected + Admin only: create a product
+router.post('/', auth, admin, async (req, res) => {
+  try {
+    const product = new Product(req.body);
     await product.save();
     res.status(201).json(product);
   } catch (error) {
-    console.error('Product create error:', error);
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 });
 
-router.put('/:id', auth, async (req, res) => {
+// Protected + Admin only: update a product
+router.put('/:id', auth, admin, async (req, res) => {
   try {
-    if (!req.user.isAdmin) {
-      return res.status(403).json({ error: 'Admin access required' });
-    }
-    const { name, price, image, description, stock } = req.body;
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      { name, price, image, description, stock },
-      { new: true }
-    );
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!product) return res.status(404).json({ error: 'Product not found' });
     res.json(product);
   } catch (error) {
-    console.error('Product update error:', error);
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 });
 
-router.delete('/:id', auth, async (req, res) => {
+// Protected + Admin only: delete a product
+router.delete('/:id', auth, admin, async (req, res) => {
   try {
-    if (!req.user.isAdmin) {
-      return res.status(403).json({ error: 'Admin access required' });
-    }
     const product = await Product.findByIdAndDelete(req.params.id);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
+    if (!product) return res.status(404).json({ error: 'Product not found' });
     res.json({ message: 'Product deleted' });
   } catch (error) {
-    console.error('Product delete error:', error);
     res.status(500).json({ error: error.message });
   }
 });
