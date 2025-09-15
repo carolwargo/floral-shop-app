@@ -1,4 +1,3 @@
-// client/src/context/AuthContext.jsx
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
@@ -30,8 +29,8 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const decoded = jwtDecode(token);
       console.log('Decoded JWT on login:', decoded); // Debug
-      setUser({ email, isAdmin: decoded.isAdmin || false });
-      console.log('User set:', { email, isAdmin: decoded.isAdmin || false });
+      setUser({ name: decoded.name || email, email, isAdmin: decoded.isAdmin || false });
+      console.log('User set:', { name: decoded.name || email, email, isAdmin: decoded.isAdmin || false });
       await fetchCart(token);
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
@@ -68,8 +67,8 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const decoded = jwtDecode(token);
       console.log('Decoded JWT on init:', decoded); // Debug
-      setUser({ email: decoded.email, isAdmin: decoded.isAdmin || false });
-      console.log('Initial user set:', { email: decoded.email, isAdmin: decoded.isAdmin || false });
+      setUser({ name: decoded.name || decoded.email, email: decoded.email, isAdmin: decoded.isAdmin || false });
+      console.log('Initial user set:', { name: decoded.name || decoded.email, email: decoded.email, isAdmin: decoded.isAdmin || false });
       fetchCart(token);
     } else if (token) {
       console.log('Removing expired token:', token);
@@ -86,8 +85,11 @@ export const AuthProvider = ({ children }) => {
     setError(null);
   };
 
+  // Compute cart item count
+  const cartItemsCount = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+
   return (
-    <AuthContext.Provider value={{ user, cart, error, login, logout, fetchCart }}>
+    <AuthContext.Provider value={{ user, cart, cartItemsCount, error, login, logout, fetchCart }}>
       {children}
     </AuthContext.Provider>
   );

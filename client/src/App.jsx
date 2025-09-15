@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import AdminDashboard from './pages/AdminDashboard';
 import ProductDetail from './pages/ProductDetail';
+import Contact from './pages/Contact';
 import Nav from './components/Nav';
 import { AuthProvider } from './context/AuthContext';
 
@@ -26,6 +27,7 @@ function App() {
            <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

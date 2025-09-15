@@ -41,15 +41,19 @@ floral-shop-app/
 │   ├── middleware/
 │   │   └── auth.js                 # Authentication middleware (auth, admin)
 │   ├── models/
-│   │   ├── Cart.js                 # Order schema
+│   │   ├── Cart.js                 # Cart schema
+│   │   ├── Message.js              # Message schema
 │   │   ├── Order.js                # Order schema
 │   │   ├── Product.js              # Product schema
+│   │   ├── Subscription.js         # Subscription schema
 │   │   └── User.js                 # User schema
 │   ├── routes/
 │   │   ├── authRoutes.js           # Auth routes (login, signup)
 │   │   ├── cartRoutes.js           # Cart routes
+│   │   ├── messageRoutes.js        # Message routes
 │   │   ├── orderRoutes.js          # Order CRUD routes
 │   │   ├── productRoutes.js        # Product CRUD routes
+│   │   ├── subscriptionRoutes.js   # Subscription routes
 │   │   ├── paymentRoutes.js        # Stripe payment routes
 │   │   └── userRoutes.js           # User CRUD routes
 │   ├── .env                        # Environment variables
