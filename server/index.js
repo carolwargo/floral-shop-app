@@ -11,10 +11,10 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 

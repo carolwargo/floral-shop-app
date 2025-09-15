@@ -1,44 +1,109 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Search from '../components/Search';
+import ProductCard from '../components/ProductCard';
 
-function Home() {
-  const [products, setProducts] = useState([]);
-
-  const handleSearchResults = (results) => {
-    setProducts(results);
-  };
+function Homepage() {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchFeaturedProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/products');
-        setProducts(res.data);
+        // Assuming an API endpoint for featured products; adjust as needed
+        const res = await axios.get('http://localhost:5000/api/products?limit=3');
+        setFeaturedProducts(res.data);
+        setError(null);
       } catch (err) {
-        console.error('Fetch products error:', err);
+        setError('Failed to load featured products');
+        console.error('Fetch featured products error:', err);
       }
     };
-    fetchProducts();
+    fetchFeaturedProducts();
   }, []);
 
+  const handleAddToCart = (product) => {
+    // Implement cart logic here
+    alert(`${product.name} added to cart!`);
+  };
+
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Products</h2>
-      <Search onResults={handleSearchResults} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {products.map((product) => (
-          <div key={product._id} className="border p-4 rounded shadow">
-            <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-2" />
-            <p className="text-lg font-semibold">{product.name}</p>
-            <p>${product.price.toFixed(2)}</p>
-            <p>{product.description}</p>
-            <p>Stock: {product.stock}</p>
-          </div>
-        ))}
-      </div>
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <h1 style={styles.title}>Welcome to Floral Shop</h1>
+        <p style={styles.subtitle}>Discover the Beauty of Fresh Flowers</p>
+        <Link to="/shop" style={styles.shopButton}>Shop Now</Link>
+      </header>
+      <section style={styles.adSection}>
+        <h2 style={styles.adTitle}>Featured Bouquets</h2>
+        {error && <p style={styles.error}>{error}</p>}
+        <div style={styles.featuredGrid}>
+          {featuredProducts.map((product) => (
+            <ProductCard key={product._id} product={product} onAddToCart={handleAddToCart} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
 
-export default Home;
-    
+const styles = {
+  container: {
+    backgroundColor: '#FFFFFF', // White
+    color: '#000000', // Black
+    minHeight: '100vh',
+    padding: '0',
+  },
+  header: {
+    backgroundColor: '#2E4A2E', // Dark Green
+    color: '#FFFFFF', // White
+    textAlign: 'center',
+    padding: '60px 20px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+  },
+  title: {
+    fontSize: '3rem',
+    margin: '0 0 20px',
+    color: '#D4A017', // Gold
+  },
+  subtitle: {
+    fontSize: '1.5rem',
+    margin: '0 0 30px',
+    color: '#D3D3D3', // Light Gray
+  },
+  shopButton: {
+    display: 'inline-block',
+    padding: '15px 30px',
+    backgroundColor: '#D4A017', // Gold
+    color: '#000000', // Black
+    textDecoration: 'none',
+    borderRadius: '5px',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    transition: 'background-color 0.3s',
+  },
+  adSection: {
+    maxWidth: '1200px',
+    margin: '40px auto',
+    padding: '20px',
+  },
+  adTitle: {
+    fontSize: '2rem',
+    color: '#2E4A2E', // Dark Green
+    textAlign: 'center',
+    marginBottom: '30px',
+  },
+  error: {
+    color: '#D4A017', // Gold
+    textAlign: 'center',
+    marginBottom: '20px',
+  },
+  featuredGrid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '20px',
+    justifyContent: 'center',
+  },
+};
+
+export default Homepage;
