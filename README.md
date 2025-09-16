@@ -21,6 +21,7 @@ floral-shop-app/
 │   │   ├── App.css                 # 
 │   │   ├── App.jsx                 # Main app with routing
 │   │   ├── index.css               # Global CSS (optional)
+│   │   ├── Nav.css                 # 
 │   │   └── main.jsx                # Entry point for React
 │   ├── .env                        # 
 │   ├── .gitignore                  # 

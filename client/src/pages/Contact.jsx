@@ -72,7 +72,7 @@ const styles = {
   },
   title: {
     fontSize: '2rem',
-    color: '#2E4A2E', // Dark Green
+    color: '#005c00ff', // Dark Green
     textAlign: 'center',
     marginBottom: '20px',
   },
@@ -98,7 +98,7 @@ const styles = {
   },
   button: {
     padding: '12px',
-    backgroundColor: '#2E4A2E', // Dark Green
+    backgroundColor: '#005c00ff', // Dark Green
     color: '#FFFFFF', // White
     border: 'none',
     borderRadius: '5px',
@@ -106,7 +106,7 @@ const styles = {
     fontSize: '1rem',
   },
   success: {
-    color: '#2E4A2E', // Dark Green
+    color: '#005c00ff', // Dark Green
     textAlign: 'center',
     marginTop: '15px',
   },

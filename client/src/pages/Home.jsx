@@ -62,7 +62,7 @@ const styles = {
     backgroundColor: '#2E4A2E', // Dark Green
     color: '#FFFFFF', // White
     textAlign: 'center',
-    padding: '60px 20px',
+    padding: '100px 20px',
     boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
   },
   title: {

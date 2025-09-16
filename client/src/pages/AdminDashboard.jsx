@@ -346,7 +346,7 @@ const styles = {
   },
   title: {
     fontSize: '2rem',
-    color: '#2E4A2E', // Dark Green
+    color: '#005c00ff', // Dark Green
     textAlign: 'center',
     marginBottom: '20px',
   },
@@ -366,7 +366,7 @@ const styles = {
   },
   activeTab: {
     padding: '10px 20px',
-    backgroundColor: '#2E4A2E', // Dark Green
+    backgroundColor: '#005c00ff', // Dark Green
     color: '#FFFFFF', // White
     border: 'none',
     borderRadius: '5px',
@@ -380,7 +380,7 @@ const styles = {
   },
   sectionTitle: {
     fontSize: '1.5rem',
-    color: '#2E4A2E', // Dark Green
+    color: '#005c00ff', // Dark Green
     marginBottom: '15px',
   },
   form: {
@@ -398,7 +398,7 @@ const styles = {
   },
   button: {
     padding: '10px',
-    backgroundColor: '#2E4A2E', // Dark Green
+    backgroundColor: '#005c00ff', // Dark Green
     color: '#FFFFFF', // White
     border: 'none',
     borderRadius: '5px',
@@ -433,7 +433,7 @@ const styles = {
     marginBottom: '10px',
   },
   success: {
-    color: '#2E4A2E', // Dark Green
+    color: '#005c00ff', // Dark Green
     textAlign: 'center',
     marginBottom: '10px',
   },

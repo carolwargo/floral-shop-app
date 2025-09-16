@@ -9,8 +9,10 @@ import OrderHistory from './pages/OrderHistory';
 import AdminDashboard from './pages/AdminDashboard';
 import ProductDetail from './pages/ProductDetail';
 import Contact from './pages/Contact';
+import Search from './components/Search';
 import Nav from './components/Nav';
 import { AuthProvider } from './context/AuthContext';
+import './App.css';
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

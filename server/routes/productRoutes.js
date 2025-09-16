@@ -1,9 +1,21 @@
 // server/routes/productRoutes.js
-// server/routes/productRoutes.js
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 const { auth, admin } = require('../middleware/auth'); // ✅ import both
+
+// Search and list products
+router.get('/', async (req, res) => {
+  try {
+    const { search, limit } = req.query;
+    const query = search ? { name: { $regex: search, $options: 'i' } } : {};
+    const products = await Product.find(query).limit(parseInt(limit) || 0);
+    res.json(products);
+  } catch (error) {
+    console.error('Product fetch error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // Public: get all products
 router.get('/', async (req, res) => {

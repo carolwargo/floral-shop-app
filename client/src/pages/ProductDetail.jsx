@@ -92,7 +92,7 @@ const styles = {
   },
   title: {
     fontSize: '1.8rem',
-    color: '#2E4A2E', // Dark Green
+    color: '#005c00ff', // Dark Green
     margin: '0',
   },
   price: {
@@ -115,7 +115,7 @@ const styles = {
   },
   addButton: {
     padding: '12px 20px',
-    backgroundColor: '#2E4A2E', // Dark Green
+    backgroundColor: '#005c00ff', // Dark Green
     color: '#FFFFFF', // White
     border: 'none',
     borderRadius: '5px',
