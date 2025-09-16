@@ -16,6 +16,7 @@ function AdminDashboard() {
   const [orderForm, setOrderForm] = useState({ userId: '', items: [], status: 'pending' });
   const [messageForm, setMessageForm] = useState({ messageId: '', reply: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     if (!user || !user.isAdmin) {
@@ -116,10 +117,13 @@ function AdminDashboard() {
         { reply: messageForm.reply },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
+      setSuccess('Reply sent successfully');
+      setError('');
       fetchMessages();
       setMessageForm({ messageId: '', reply: '' });
     } catch (err) {
       setError('Failed to send reply');
+      setSuccess('');
     }
   };
 
@@ -141,6 +145,7 @@ function AdminDashboard() {
     <div style={styles.container}>
       <h2 style={styles.title}>Admin Dashboard</h2>
       {error && <p style={styles.error}>{error}</p>}
+      {success && <p style={styles.success}>{success}</p>}
       <div style={styles.tabs}>
         <button onClick={() => setTab('products')} style={tab === 'products' ? styles.activeTab : styles.tab}>
           Products
@@ -310,7 +315,7 @@ function AdminDashboard() {
                 >
                   <input
                     type="text"
-                    placeholder="Reply"
+                    placeholder="Reply (sent via email)"
                     value={messageForm.messageId === msg._id ? messageForm.reply : ''}
                     onChange={(e) => setMessageForm({ messageId: msg._id, reply: e.target.value })}
                     style={styles.input}
@@ -424,6 +429,11 @@ const styles = {
   },
   error: {
     color: '#D4A017', // Gold
+    textAlign: 'center',
+    marginBottom: '10px',
+  },
+  success: {
+    color: '#2E4A2E', // Dark Green
     textAlign: 'center',
     marginBottom: '10px',
   },

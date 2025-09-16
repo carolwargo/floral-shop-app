@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
+import Subscribe from '../components/Subscribe';
 
 function Homepage() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -42,6 +43,9 @@ function Homepage() {
             <ProductCard key={product._id} product={product} onAddToCart={handleAddToCart} />
           ))}
         </div>
+      </section>
+      <section>
+        <Subscribe />
       </section>
     </div>
   );

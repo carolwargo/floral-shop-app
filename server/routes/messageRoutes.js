@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Message = require('../models/Message');
 const { auth, admin } = require('../middleware/auth');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_SERVICE,
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -36,6 +47,16 @@ router.post('/:id/reply', auth, admin, async (req, res) => {
     if (!message) {
       return res.status(404).json({ error: 'Message not found' });
     }
+
+    // Send email reply
+    await transporter.sendMail({
+      from: `"Floral Shop" <${process.env.EMAIL_USER}>`,
+      to: message.email,
+      subject: 'Response to Your Inquiry',
+      text: `Dear ${message.name},\n\nThank you for contacting Floral Shop. Here is our response:\n\n${reply}\n\nBest regards,\nFloral Shop Team`,
+      html: `<p>Dear ${message.name},</p><p>Thank you for contacting Floral Shop. Here is our response:</p><p>${reply}</p><p>Best regards,<br>Floral Shop Team</p>`,
+    });
+
     res.json(message);
   } catch (error) {
     console.error('Message reply error:', error);
@@ -56,4 +77,4 @@ router.delete('/:id', auth, admin, async (req, res) => {
   }
 });
 
-module.exports = router; // Changed from export default
+module.exports = router;
