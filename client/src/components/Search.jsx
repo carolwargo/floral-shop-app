@@ -47,13 +47,17 @@ function Search() {
 
 const styles = {
   container: {
-    maxWidth: '1200px',
+    maxHeight: '100vh', 
     margin: '20px auto',
     padding: '20px',
     backgroundColor: '#FFFFFF',
     color: '#000000',
     borderRadius: '10px',
     boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: '2rem',

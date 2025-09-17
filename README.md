@@ -65,3 +65,14 @@ floral-shop-app/
 │   └── verifyPassword.js           # 
 ├── README.md                       # Project documentation
 └── .gitignore                      # Git ignore file
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    box-sizing: inherit;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
