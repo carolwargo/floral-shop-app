@@ -88,14 +88,17 @@ function Shop() {
                     ${parseFloat(product.price || 0).toFixed(2)}
                   </p>
                   
-                  {product.description && (
+                  {/* FIXED: Always render description container */}
+                  <div className="shop-product-description-container">
                     <p className="shop-product-description">
-                      {product.description.length > 80 
-                        ? `${product.description.substring(0, 80)}...` 
-                        : product.description
+                      {product.description && product.description.trim().length > 0
+                        ? (product.description.length > 80 
+                            ? `${product.description.substring(0, 80)}...` 
+                            : product.description)
+                        : 'Beautiful floral arrangement - perfect for any occasion'
                       }
                     </p>
-                  )}
+                  </div>
                   
                   <div className="shop-stock-info">
                     {product.stock > 0 ? (
