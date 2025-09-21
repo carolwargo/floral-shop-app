@@ -1,24 +1,28 @@
 // server/routes/cartRoutes.js
-// server/routes/cartRoutes.js
 const express = require('express');
 const router = express.Router();
-const Cart = require('../models/Cart');
-const { auth } = require('../middleware/auth'); // ✅ destructure the function
+const { auth } = require('../middleware/auth');
+const {
+  getCart,
+  addToCart,
+  updateCartItem,
+  deleteCartItem,
+  clearCart
+} = require('../controllers/cartController');
 
 // GET cart for logged-in user
-router.get('/', auth, async (req, res) => {
-  try {
-    console.log('Cart request user:', req.user);
-    let cart = await Cart.findOne({ userId: req.user._id }).populate('items.productId');
-    if (!cart) {
-      cart = new Cart({ userId: req.user._id, items: [] });
-      await cart.save();
-    }
-    res.json(cart);
-  } catch (error) {
-    console.error('Cart fetch error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
+router.get('/', auth, getCart);
+
+// POST add item to cart
+router.post('/', auth, addToCart);
+
+// PUT update cart item quantity
+router.put('/:itemId', auth, updateCartItem);
+
+// DELETE remove item from cart
+router.delete('/:itemId', auth, deleteCartItem);
+
+// DELETE clear entire cart
+router.delete('/', auth, clearCart);
 
 module.exports = router;

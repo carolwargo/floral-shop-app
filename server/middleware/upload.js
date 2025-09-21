@@ -10,9 +10,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Configure multer for memory storage (process file in memory)
+// Configure multer for memory storage
 const storage = multer.memoryStorage();
-const multerUpload = multer({ 
+const upload = multer({ 
   storage,
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB limit
@@ -26,59 +26,32 @@ const multerUpload = multer({
   },
 });
 
-// Upload stream to Cloudinary
-const uploadToCloudinary = (buffer, callback) => {
-  const uploadStream = cloudinary.uploader.upload_stream(
-    {
-      folder: 'floral-shop-products',
-      allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-      transformation: [
-        { width: 800, height: 800, crop: 'limit' },
-        { quality: 'auto' }
-      ]
-    },
-    (error, result) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, {
-          path: result.secure_url,
-          filename: result.public_id
-        });
+// Upload buffer to Cloudinary
+const uploadToCloudinary = (buffer) => {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: 'floral-shop-products',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+        transformation: [
+          { width: 800, height: 800, crop: 'limit' },
+          { quality: 'auto' }
+        ]
+      },
+      (error, result) => {
+        if (error) {
+          console.error('Cloudinary error:', error);
+          reject(error);
+        } else {
+          console.log('Cloudinary success:', result.secure_url);
+          resolve(result.secure_url);
+        }
       }
-    }
-  );
-  
-  const upload = stream.Readable.from(buffer);
-  upload.pipe(uploadStream);
-};
-
-// Middleware to handle file upload and Cloudinary processing
-const processUpload = multerUpload.single('image');
-const uploadMiddleware = (req, res, next) => {
-  processUpload(req, res, async (err) => {
-    if (err) {
-      return next(err);
-    }
+    );
     
-    if (req.file) {
-      try {
-        const { path, filename } = await new Promise((resolve, reject) => {
-          uploadToCloudinary(req.file.buffer, (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          });
-        });
-        
-        req.file.cloudFile = { path, filename };
-      } catch (error) {
-        console.error('Cloudinary upload error:', error);
-        return next(error);
-      }
-    }
-    
-    next();
+    const uploadStreamInstance = stream.Readable.from(buffer);
+    uploadStreamInstance.pipe(uploadStream);
   });
 };
 
-module.exports = { uploadMiddleware, multerUpload };
+module.exports = { upload, uploadToCloudinary };
