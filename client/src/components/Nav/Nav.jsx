@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import '../Nav.css';
+import { AuthContext } from '../../context/AuthContext';
+import './Nav.css';
 
 function Nav() {
   const { user, logout, cartItemsCount } = useContext(AuthContext);

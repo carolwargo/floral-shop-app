@@ -1,9 +1,9 @@
 //pages/Shop.jsx
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../context/AuthContext.jsx';
-import ProductCard from '../components/ProductCard/ProductCard.jsx'; // ← ADD THIS IMPORT
-import '../Shop.css';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import ProductCard from '../../components/ProductCard/ProductCard.jsx'; // ← ADD THIS IMPORT
+import './Shop.css';
 
 function Shop() {
   const [products, setProducts] = useState([]);

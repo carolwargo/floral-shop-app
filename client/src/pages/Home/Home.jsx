@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import ProductCard from '../components/ProductCard/ProductCard';
-import Subscribe from '../components/Subscribe/Subscribe';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import Subscribe from '../../components/Subscribe/Subscribe';
 import '../Home.css'; // ← ADD THIS IMPORT
 
 function Homepage() {

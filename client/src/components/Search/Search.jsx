@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
-import ProductCard from './ProductCard/ProductCard';
+import ProductCard from '../ProductCard/ProductCard';
 
 function Search() {
   const [products, setProducts] = useState([]);

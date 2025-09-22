@@ -2,9 +2,9 @@
 .product-card {
   background-color: #FFFFFF;
   border: 1px solid #C7C7CC;
-  border-radius: 16px; /* More rounded for modern look */
+  border-radius: 4px; /* More rounded for modern look */
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); /* Slightly stronger shadow */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6); /* Slightly stronger shadow */
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: flex;
   flex-direction: column;
@@ -13,15 +13,14 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  max-width: 320px; /* Slightly wider */
+  max-width: 350px; /* Slightly wider */
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
 .product-card:hover {
   transform: translateY(-4px); /* More lift */
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12); /* Stronger hover shadow */
-  border-color: #007AFF; /* Blue accent on hover */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7); /* Stronger hover shadow */
 }
 
 .product-image-container {
@@ -88,7 +87,7 @@
   color: #1D1D1F;
   margin: 0 0 12px 0;
   line-height: 1.2;
-  min-height: 2.5rem;
+  min-height: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -118,8 +117,8 @@
 .product-description {
   font-size: 0.9375rem; /* Slightly larger */
   color: #6D6D72;
-  line-height: 1.5;
-  margin: 0 0 20px 0;
+  line-height: 1;
+  margin: 0 0 5px 0;
   min-height: 3rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -137,7 +136,7 @@
   display: flex;
   gap: 12px; /* More space */
   flex-shrink: 0;
-  min-height: 64px; /* Taller buttons for premium feel */
+  min-height: 24px; /* Taller buttons for premium feel */
   padding: 0;
   margin: 0;
   width: 100%;
@@ -147,15 +146,15 @@
 
 .product-button {
   flex: 1;
-  padding: 14px 20px;
+  padding: 4px 10px;
   border-radius: 10px;
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
+  min-height: 36px;
   transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none;
   cursor: pointer;
@@ -166,7 +165,7 @@
   margin: 0;
   box-sizing: border-box;
   text-align: center;
-  font-size: 0.9375rem;
+  font-size: 0.8rem;
 }
 
 .product-button-primary {
