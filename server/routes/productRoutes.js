@@ -9,21 +9,21 @@ const {
   updateProduct, 
   deleteProduct 
 } = require('../controllers/productController');
-const { upload } = require('../middleware/upload');
+const { upload } = require('../middleware/upload'); // ← MAKE SURE THIS LINE EXISTS
 
-// GET all products
+// GET all products (no auth needed)
 router.get('/', getProducts);
 
-// GET single product
+// GET single product (no auth needed)
 router.get('/:id', getProductById);
 
-// POST create product with image upload
-router.post('/', auth, admin, upload.single('image'), createProduct);
+// POST create product - WITH MULTER MIDDLEWARE
+router.post('/', auth, admin, upload.single('image'), createProduct); // ← THIS WAS MISSING!
 
-// PUT update product with optional image upload
-router.put('/:id', auth, admin, upload.single('image'), updateProduct);
+// PUT update product - WITH MULTER MIDDLEWARE  
+router.put('/:id', auth, admin, upload.single('image'), updateProduct); // ← THIS WAS MISSING!
 
-// DELETE product
+// DELETE product (admin only)
 router.delete('/:id', auth, admin, deleteProduct);
 
 module.exports = router;

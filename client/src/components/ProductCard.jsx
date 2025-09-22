@@ -1,82 +1,45 @@
 import { Link } from 'react-router-dom';
+import '../ProductCard.css'; // Import the CSS file
 
 function ProductCard({ product, onAddToCart }) {
   return (
-    <div style={styles.card}>
+    <div className="product-card">
+      {/* FIXED: Use PlaceKitten instead of broken placeholder */}
       <img
-        src={product.image || 'https://via.placeholder.com/200'}
-        alt={product.name}
-        style={styles.image}
+        src={product.image || 'https://placekitten.com/200/150'} 
+        alt={product.name || 'Product image'}
+        className="product-card-image"
+        onError={(e) => {
+          // Double fallback - if PlaceKitten fails too (unlikely)
+          e.target.src = 'https://placekitten.com/200/150';
+          console.log('Image fallback activated for:', product.name);
+        }}
+        onLoad={() => {
+          // Optional: Log successful loads
+          console.log('Image loaded:', product.name, product.image);
+        }}
       />
-      <h3 style={styles.title}>{product.name}</h3>
-      <p style={styles.price}>${product.price.toFixed(2)}</p>
-      <p style={styles.description}>{product.description || 'No description available'}</p>
-      <div style={styles.buttonGroup}>
-        <button onClick={() => onAddToCart(product)} style={styles.addButton}>
-          Add to Cart
+      <h3 className="product-card-title">{product.name}</h3>
+      <p className="product-card-price">
+        ${parseFloat(product.price || 0).toFixed(2)}
+      </p>
+      <p className="product-card-description">
+        {product.description || 'Beautiful floral arrangement'}
+      </p>
+      <div className="product-card-button-group">
+        <button 
+          onClick={() => onAddToCart(product)} 
+          className={`product-card-add-button ${product.stock === 0 ? 'disabled' : ''}`}
+          disabled={product.stock === 0}
+        >
+          {product.stock === 0 ? 'Sold Out' : 'Add to Cart'}
         </button>
-        <Link to={`/product/${product._id}`} style={styles.detailsLink}>
+        <Link to={`/product/${product._id}`} className="product-card-details-link">
           View Details
         </Link>
       </div>
     </div>
   );
 }
-
-const styles = {
-  card: {
-    backgroundColor: '#FFFFFF', // White
-    border: '1px solid #4A4A4A', // Gray
-    borderRadius: '10px',
-    padding: '15px',
-    width: '220px',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-    transition: 'transform 0.3s',
-  },
-  image: {
-    width: '100%',
-    height: '150px',
-    objectFit: 'cover',
-    borderRadius: '8px',
-    marginBottom: '10px',
-  },
-  title: {
-    fontSize: '1.2rem',
-    color: '#000000', // Black
-    margin: '10px 0',
-  },
-  price: {
-    fontSize: '1.1rem',
-    color: '#005c00ff', // Dark Green
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: '0.9rem',
-    color: '#4A4A4A', // Gray
-    margin: '10px 0',
-  },
-  buttonGroup: {
-    display: 'flex',
-    gap: '10px',
-    justifyContent: 'center',
-  },
-  addButton: {
-    padding: '10px',
-    backgroundColor: '#005c00ff', // Dark Green
-    color: '#FFFFFF', // White
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    fontSize: '0.9rem',
-  },
-  detailsLink: {
-    padding: '10px',
-    backgroundColor: '#D4A017', // Gold
-    color: '#000000', // Black
-    borderRadius: '5px',
-    textDecoration: 'none',
-    fontSize: '0.9rem',
-  },
-};
 
 export default ProductCard;

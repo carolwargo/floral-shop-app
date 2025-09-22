@@ -54,4 +54,7 @@ const uploadToCloudinary = (buffer) => {
   });
 };
 
-module.exports = { upload, uploadToCloudinary };
+module.exports = { 
+  upload,        // ← This is the multer instance
+  uploadToCloudinary 
+};
