@@ -1,0 +1,593 @@
+/* Subscribe.css - Floral Subscription Component */
+.subscribe-section {
+  position: relative;
+  padding: 80px 0;
+  background: linear-gradient(135deg, #F8F9FA 0%, #E8F4FD 50%, #FFF7E6 100%);
+  overflow: hidden;
+}
+
+.subscribe-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(144, 238, 144, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 218, 185, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.subscribe-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.subscribe-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.subscribe-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(229, 229, 231, 0.8), transparent);
+}
+
+/* Decorative Flowers */
+.subscribe-decoration {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+.subscribe-flower {
+  position: absolute;
+  font-size: 2rem;
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+.flower-1 {
+  top: 10px;
+  right: 10px;
+  animation-delay: 0s;
+}
+
+.flower-2 {
+  top: 40px;
+  right: 40px;
+  font-size: 1.5rem;
+  animation-delay: 2s;
+}
+
+.flower-3 {
+  top: 20px;
+  right: 20px;
+  font-size: 1.8rem;
+  animation-delay: 4s;
+}
+
+.main-flower {
+  font-size: 4rem;
+  display: block;
+  animation: bloom 3s ease-in-out infinite alternate;
+}
+
+.leaf-1 {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 60px;
+  left: -20px;
+  animation: sway 4s ease-in-out infinite;
+}
+
+.leaf-2 {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 80px;
+  right: -15px;
+  animation: sway 4s ease-in-out infinite reverse;
+}
+
+/* Content Layout */
+.subscribe-content {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+.subscribe-visual {
+  flex: 0 0 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FFF0F5, #F0FFF4);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(255, 182, 193, 0.15);
+}
+
+.subscribe-illustration {
+  position: relative;
+  text-align: center;
+}
+
+/* Text Content */
+.subscribe-text {
+  flex: 1;
+}
+
+.subscribe-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1D1D1F 0%, #6B7280 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.subscribe-subtitle {
+  font-size: 1.125rem;
+  color: #6D6D72;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+  font-weight: 400;
+  max-width: 500px;
+}
+
+/* Form */
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.subscribe-input-group {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  position: relative;
+}
+
+.subscribe-input {
+  flex: 1;
+  padding: 16px 24px;
+  border: 2px solid #E5E5E7;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1D1D1F;
+  background-color: #FFFFFF;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  outline: none;
+  min-height: 56px;
+}
+
+.subscribe-input::placeholder {
+  color: #8E8E93;
+}
+
+.subscribe-input:focus {
+  border-color: #007AFF;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.subscribe-input.error {
+  border-color: #FF6B6B;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.subscribe-button {
+  padding: 0 24px;
+  background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  letter-spacing: 0.015em;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.subscribe-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.subscribe-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.subscribe-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+}
+
+.subscribe-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.subscribe-button:disabled {
+  background: #C7C7CC;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.subscribe-button:disabled::before {
+  display: none;
+}
+
+.subscribe-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #FFFFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.subscribe-checkmark,
+.subscribe-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.subscribe-button:hover .subscribe-arrow {
+  transform: translateX(2px);
+}
+
+/* Success & Error States */
+.subscribe-success,
+.subscribe-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  animation: slideInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin-top: 8px;
+}
+
+.subscribe-success {
+  background: linear-gradient(135deg, #F0FFF4, #E6FFFA);
+  color: #16A34A;
+  border: 1px solid #BBF7D0;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
+}
+
+.subscribe-error {
+  background: linear-gradient(135deg, #FEF2F2, #FFE4E6);
+  color: #DC2626;
+  border: 1px solid #FECACA;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+}
+
+.success-icon,
+.error-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.success-message,
+.error-message {
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* Benefits */
+.subscribe-benefits {
+  margin-top: 24px;
+}
+
+.benefits-text {
+  font-size: 0.875rem;
+  color: #6D6D72;
+  margin: 0;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Animations */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(5deg); }
+  66% { transform: translateY(-4px) rotate(-3deg); }
+}
+
+@keyframes bloom {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.05) rotate(2deg); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .subscribe-section {
+    padding: 60px 0;
+  }
+  
+  .subscribe-card {
+    padding: 40px 32px;
+  }
+  
+  .subscribe-content {
+    gap: 32px;
+  }
+  
+  .subscribe-visual {
+    flex: 0 0 120px;
+    padding: 20px;
+  }
+  
+  .main-flower {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .subscribe-section {
+    padding: 48px 0;
+  }
+  
+  .subscribe-container {
+    padding: 0 16px;
+  }
+  
+  .subscribe-card {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  .subscribe-content {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+  
+  .subscribe-visual {
+    flex: none;
+    padding: 20px 16px;
+  }
+  
+  .subscribe-title {
+    font-size: 2rem;
+  }
+  
+  .subscribe-subtitle {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+  
+  .subscribe-input-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .subscribe-button {
+    justify-content: center;
+  }
+  
+  .benefits-text {
+    font-size: 0.8125rem;
+  }
+  
+  .subscribe-decoration {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-section {
+    padding: 32px 0;
+  }
+  
+  .subscribe-card {
+    padding: 24px 20px;
+    margin: 0 8px;
+  }
+  
+  .subscribe-title {
+    font-size: 1.75rem;
+  }
+  
+  .subscribe-input,
+  .subscribe-button {
+    padding: 14px 16px;
+    min-height: 52px;
+  }
+  
+  .main-flower {
+    font-size: 2.5rem;
+  }
+  
+  .subscribe-visual {
+    padding: 16px 12px;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .subscribe-section {
+    background: linear-gradient(135deg, #1C1C1E 0%, #0A84FF20 50%, #2C2C2E 100%);
+  }
+  
+  .subscribe-card {
+    background: rgba(44, 44, 46, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .subscribe-card::before {
+    background: linear-gradient(90deg, transparent, rgba(72, 72, 74, 0.8), transparent);
+  }
+  
+  .subscribe-title {
+    background: linear-gradient(135deg, #F5F5F7 0%, #AEAEB2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .subscribe-subtitle {
+    color: #AEAEB2;
+  }
+  
+  .subscribe-input {
+    background-color: #2C2C2E;
+    border-color: #48484A;
+    color: #F5F5F7;
+  }
+  
+  .subscribe-input::placeholder {
+    color: #8E8E93;
+  }
+  
+  .subscribe-input:focus {
+    border-color: #0A84FF;
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+  }
+  
+  .subscribe-button {
+    background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  }
+  
+  .benefits-text {
+    color: #AEAEB2;
+  }
+  
+  .subscribe-success {
+    background: linear-gradient(135deg, #064E3B20, #065F4620);
+    color: #34D399;
+    border-color: #34D39940;
+  }
+  
+  .subscribe-error {
+    background: linear-gradient(135deg, #7F1D1D20, #991B1B20);
+    color: #F87171;
+    border-color: #FECACA;
+  }
+  
+  .subscribe-visual {
+    background: linear-gradient(135deg, #2C2C2E, #3A3A3C);
+    box-shadow: 0 8px 24px rgba(10, 132, 255, 0.15);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .subscribe-flower,
+  .subscribe-button,
+  .subscribe-input {
+    animation: none;
+    transition: none;
+  }
+  
+  .subscribe-button:hover {
+    transform: none;
+  }
+  
+  .subscribe-arrow {
+    transform: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .subscribe-card {
+    border-width: 2px;
+  }
+  
+  .subscribe-input,
+  .subscribe-button {
+    border-width: 2px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .subscribe-section {
+    background: none;
+    padding: 20px 0;
+  }
+  
+  .subscribe-card {
+    box-shadow: none;
+    border: 1px solid #000;
+    background: white;
+  }
+  
+  .subscribe-button {
+    display: none;
+  }
+  
+  .subscribe-decoration,
+  .subscribe-visual {
+    display: none;
+  }
+}

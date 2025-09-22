@@ -7,7 +7,6 @@ function Nav() {
   const { user, logout, cartItemsCount } = useContext(AuthContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -29,62 +28,135 @@ function Nav() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <nav className="nav">
-      <Link to="/" className="logo">
-        Floral Shop
-      </Link>
-      <button className="hamburger" onClick={toggleMenu}>
-        {isMenuOpen ? '✕' : '☰'}
-      </button>
-      <div className={`links-container ${isMenuOpen ? 'open' : ''}`}>
-        <form onSubmit={handleSearch} className="search-form">
+    <header className="nav-header" role="banner">
+      {/* Logo & Hamburger */}
+      <div className="nav-branding">
+        <Link to="/" className="nav-logo" aria-label="Home">
+          Floral Shop
+        </Link>
+        <button 
+          className="nav-hamburger" 
+          onClick={toggleMenu}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? '✕' : '☰'}
+        </button>
+      </div>
+
+      {/* Main Navigation */}
+      <nav className={`nav-main ${isMenuOpen ? 'nav-main-open' : ''}`} role="navigation">
+        <form onSubmit={handleSearch} className="nav-search-form" role="search">
+          <label htmlFor="search-input" className="sr-only">
+            Search products
+          </label>
           <input
-            type="text"
+            id="search-input"
+            type="search"
             placeholder="Search flowers..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
+            className="nav-search-input"
+            aria-label="Search products"
           />
-          <button type="submit" className="search-button">
-            Search
+          <button 
+            type="submit" 
+            className="nav-search-button"
+            aria-label="Search"
+          >
+            ⌕
           </button>
         </form>
-        <div className="links">
-          <Link to="/shop" className="link" onClick={() => setIsMenuOpen(false)}>
-            Shop
-          </Link>
-          <Link to="/contact" className="link" onClick={() => setIsMenuOpen(false)}>
-            Contact
-          </Link>
-          <Link to="/cart" className="link" onClick={() => setIsMenuOpen(false)}>
-            Cart {cartItemsCount > 0 && <span className="cart-badge">{cartItemsCount}</span>}
-          </Link>
+
+        <ul className="nav-links" role="list">
+          <li>
+            <Link 
+              to="/shop" 
+              className="nav-link" 
+              onClick={closeMenu}
+            >
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/contact" 
+              className="nav-link" 
+              onClick={closeMenu}
+            >
+              Contact
+            </Link>
+          </li>
+          <li className="nav-cart-item">
+            <Link 
+              to="/cart" 
+              className="nav-link nav-cart-link" 
+              onClick={closeMenu}
+              aria-label={`View cart, ${cartItemsCount} items`}
+            >
+              <span className="nav-cart-icon" aria-hidden="true">🛒</span>
+              {cartItemsCount > 0 && (
+                <span className="nav-cart-badge" aria-label={`${cartItemsCount} items in cart`}>
+                  {cartItemsCount}
+                </span>
+              )}
+            </Link>
+          </li>
+        </ul>
+
+        {/* User Actions */}
+        <div className="nav-user-actions" role="group" aria-label="User actions">
           {user ? (
             <>
-              <span className="user-name">{user.name}</span>
+              <span className="nav-user-name" aria-label={`Logged in as ${user.name}`}>
+                {user.name}
+              </span>
               {user.isAdmin && (
-                <Link to="/admin" className="link" onClick={() => setIsMenuOpen(false)}>
+                <Link 
+                  to="/admin" 
+                  className="nav-link nav-admin-link" 
+                  onClick={closeMenu}
+                  aria-label="Admin dashboard"
+                >
                   Admin
                 </Link>
               )}
-              <button onClick={handleLogout} className="logout-button">
-                Logout
+              <button 
+                onClick={handleLogout} 
+                className="nav-logout-button"
+                aria-label="Sign out"
+              >
+                Sign Out
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="link" onClick={() => setIsMenuOpen(false)}>
-                Login
+              <Link 
+                to="/login" 
+                className="nav-link nav-auth-link" 
+                onClick={closeMenu}
+                aria-label="Sign in"
+              >
+                Sign In
               </Link>
-              <Link to="/signup" className="link" onClick={() => setIsMenuOpen(false)}>
-                Signup
+              <Link 
+                to="/signup" 
+                className="nav-auth-button" 
+                onClick={closeMenu}
+                aria-label="Create account"
+              >
+                Sign Up
               </Link>
             </>
           )}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

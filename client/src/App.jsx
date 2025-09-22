@@ -8,11 +8,12 @@ import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import AdminDashboard from './pages/AdminDashboard';
 import ProductDetail from './pages/ProductDetail';
-import Contact from './pages/Contact';
+import Contact from './pages/Contact/Contact';
 import Search from './components/Search';
 import Nav from './components/Nav';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
+import Test from './pages/Test';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

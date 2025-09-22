@@ -1,13 +1,16 @@
+//pages/Shop.jsx
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext.jsx';
+import ProductCard from '../components/ProductCard/ProductCard.jsx'; // ← ADD THIS IMPORT
 import '../Shop.css';
 
 function Shop() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [addingToCart, setAddingToCart] = useState({});
-  const { addToCart } = useContext(AuthContext);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { addToCart, user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,7 +28,7 @@ function Shop() {
   }, []);
 
   const handleAddToCart = async (productId, quantity) => {
-    if (!addToCart) {
+    if (!addToCart || !user) {
       alert('Please log in to add items to cart');
       return;
     }
@@ -42,99 +45,74 @@ function Shop() {
     }
   };
 
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) {
     return (
       <div className="shop-loading-container">
         <div className="shop-loading-spinner"></div>
-        <p className="shop-loading-text">Loading our floral collection...</p>
+        <p className="shop-loading-text">Loading our collection...</p>
       </div>
     );
   }
 
   return (
-    <div className="shop-container">
-      <h2 className="shop-title">Our Floral Collection</h2>
-      
-      {products.length === 0 ? (
+    <main className="shop-container">
+      {/* Header with Search */}
+      <header className="shop-header">
+        <h1 className="shop-title">Our Collection</h1>
+        <form className="shop-search-form" role="search" onSubmit={(e) => {
+          e.preventDefault();
+          // Handle search - could navigate to search page
+        }}>
+          <label htmlFor="shop-search" className="sr-only">Search products</label>
+          <div className="shop-search-container">
+            <input
+              id="shop-search"
+              type="search"
+              placeholder="Search by name or description..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="shop-search-input"
+            />
+            <button type="submit" className="shop-search-button" aria-label="Search">
+              ⌕
+            </button>
+          </div>
+        </form>
+      </header>
+
+      {/* Products Grid */}
+      {filteredProducts.length === 0 ? (
         <div className="shop-empty-state">
-          <p className="shop-empty-message">No products available at the moment</p>
-          <div className="shop-empty-flower">🌸</div>
+          <div className="shop-empty-icon">🌸</div>
+          <h2 className="shop-empty-title">
+            {searchQuery ? `No results for "${searchQuery}"` : 'No products available'}
+          </h2>
+          <p className="shop-empty-subtitle">
+            {searchQuery ? 'Try a different search term' : 'Check back soon for new arrivals'}
+          </p>
+          <Link to="/shop" className="shop-empty-button">
+            Browse All Products
+          </Link>
         </div>
       ) : (
-        <div className="shop-products-grid">
-          {products.map((product) => {
-            const isAdding = addingToCart[product._id];
-            
-            return (
-              <div key={product._id} className="shop-product-card">
-                <div className="shop-image-container">
-                  <img 
-                    src={product.image || 'https://placekitten.com/150/150'} 
-                    alt={product.name || 'Product image'}
-                    className="shop-product-image"
-                    onError={(e) => {
-                      e.target.src = 'https://placekitten.com/150/150';
-                    }}
-                  />
-                  {product.stock === 0 && (
-                    <div className="shop-out-of-stock-badge">Out of Stock</div>
-                  )}
-                </div>
-                
-                <div className="shop-product-info">
-                  <h3 className="shop-product-name">{product.name}</h3>
-                  
-                  <p className="shop-product-price">
-                    ${parseFloat(product.price || 0).toFixed(2)}
-                  </p>
-                  
-                  {/* FIXED: Always render description container */}
-                  <div className="shop-product-description-container">
-                    <p className="shop-product-description">
-                      {product.description && product.description.trim().length > 0
-                        ? (product.description.length > 80 
-                            ? `${product.description.substring(0, 80)}...` 
-                            : product.description)
-                        : 'Beautiful floral arrangement - perfect for any occasion'
-                      }
-                    </p>
-                  </div>
-                  
-                  <div className="shop-stock-info">
-                    {product.stock > 0 ? (
-                      <span className="shop-in-stock">
-                        📦 In Stock: {product.stock}
-                      </span>
-                    ) : (
-                      <span className="shop-out-of-stock">❌ Out of Stock</span>
-                    )}
-                  </div>
-                  
-                  <button 
-                    onClick={() => handleAddToCart(product._id, 1)}
-                    disabled={isAdding || product.stock === 0 || !addToCart}
-                    className={`shop-add-to-cart-button ${isAdding || product.stock === 0 || !addToCart ? 'disabled' : ''}`}
-                  >
-                    {isAdding ? (
-                      <>
-                        <div className="shop-button-spinner"></div>
-                        Adding...
-                      </>
-                    ) : product.stock === 0 ? (
-                      'Sold Out'
-                    ) : !addToCart ? (
-                      'Log In to Add'
-                    ) : (
-                      'Add to Cart'
-                    )}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <section className="shop-products-section">
+          <div className="shop-products-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard 
+                key={product._id} 
+                product={product} 
+                onAddToCart={handleAddToCart} 
+              />
+            ))}
+          </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
 

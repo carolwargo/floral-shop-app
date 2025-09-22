@@ -1,0 +1,376 @@
+/* components/ProductCard/ProductCard.css - ENHANCED Apple Design - More Pronounced */
+.product-card {
+  background-color: #FFFFFF;
+  border: 1px solid #C7C7CC;
+  border-radius: 16px; /* More rounded for modern look */
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); /* Slightly stronger shadow */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 320px; /* Slightly wider */
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.product-card:hover {
+  transform: translateY(-4px); /* More lift */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12); /* Stronger hover shadow */
+  border-color: #007AFF; /* Blue accent on hover */
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F5F5F7 0%, #E8F0FE 100%); /* Subtle gradient */
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease; /* Slower, more elegant */
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05); /* More zoom */
+}
+
+.product-out-of-stock {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(29, 29, 31, 0.95);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 20px; /* More rounded badge */
+  font-size: 0.8125rem;
+  font-weight: 600;
+  z-index: 2;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.product-content {
+  padding: 24px; /* More padding for premium feel */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background-color: transparent;
+  box-sizing: border-box;
+  min-height: 0;
+}
+
+.product-title {
+  font-size: 1.25rem; /* Slightly larger */
+  font-weight: 700; /* Bolder for impact */
+  color: #1D1D1F;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+  min-height: 2.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  box-sizing: border-box;
+}
+
+.product-price {
+  font-size: 1.5rem; /* Larger, more prominent */
+  font-weight: 700; /* Bolder */
+  color: #007AFF;
+  margin: 0 0 16px 0;
+  min-height: 1.8rem;
+  line-height: 1.1;
+  padding: 0;
+  text-align: left;
+  letter-spacing: -0.015em;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  box-sizing: border-box;
+}
+
+.product-description {
+  font-size: 0.9375rem; /* Slightly larger */
+  color: #6D6D72;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  min-height: 3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  box-sizing: border-box;
+}
+
+.product-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 12px; /* More space */
+  flex-shrink: 0;
+  min-height: 64px; /* Taller buttons for premium feel */
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.product-button {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: none;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  letter-spacing: 0.015em;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 0.9375rem;
+}
+
+.product-button-primary {
+  background-color: #007AFF;
+  color: #FFFFFF;
+}
+
+.product-button-primary:hover:not(:disabled) {
+  background-color: #0056CC;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+}
+
+.product-button-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+}
+
+.product-button-primary:disabled {
+  background-color: #C7C7CC;
+  color: #8E8E93;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.product-button-secondary {
+  background-color: #F5F5F7;
+  color: #1D1D1F;
+  border: 1px solid #C7C7CC;
+  text-align: center;
+}
+
+.product-button-secondary:hover:not(:disabled) {
+  background-color: #E8E8ED;
+  border-color: #007AFF;
+  color: #007AFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15);
+}
+
+.product-button-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);
+}
+
+/* Loading & Error States */
+.product-card-loading {
+  background-color: #F5F5F7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  color: #8E8E93;
+  font-size: 0.875rem;
+  font-style: italic;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-card-skeleton {
+  background: linear-gradient(90deg, #F5F5F7 25%, #E8E8ED 50%, #F5F5F7 75%);
+  background-size: 200% 100%;
+  animation: product-card-loading 1.5s infinite;
+  border: none;
+  margin: 0;
+  padding: 20px;
+  min-height: 220px;
+  box-sizing: border-box;
+}
+
+@keyframes product-card-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-card {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .product-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .product-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image-container {
+    height: 180px;
+  }
+  
+  .product-content {
+    padding: 16px;
+  }
+  
+  .product-title {
+    font-size: 1rem;
+    min-height: 2rem;
+  }
+  
+  .product-price {
+    font-size: 1.125rem;
+    min-height: 1.35rem;
+  }
+  
+  .product-description {
+    font-size: 0.8125rem;
+    min-height: 2.4rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-button,
+  .product-image {
+    transition: none;
+  }
+  
+  .product-card:hover {
+    transform: none;
+  }
+  
+  .product-card-skeleton {
+    animation: none;
+    background-color: #F5F5F7;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .product-card {
+    border-width: 2px;
+  }
+  
+  .product-button {
+    border: 1px solid;
+  }
+  
+  .product-image-container {
+    border: 1px solid;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .product-card {
+    background-color: #2C2C2E;
+    border-color: #3A3A3C;
+    color: #F5F5F7;
+  }
+  
+  .product-image-container {
+    background-color: #1C1C1E;
+  }
+  
+  .product-title {
+    color: #F5F5F7;
+  }
+  
+  .product-description {
+    color: #AEAEB2;
+  }
+  
+  .product-button-secondary {
+    background-color: #3A3A3C;
+    color: #F5F5F7;
+    border-color: #48484A;
+  }
+  
+  .product-button-primary:disabled {
+    background-color: #48484A;
+  }
+  
+  .product-card-loading {
+    background-color: #3A3A3C;
+    color: #AEAEB2;
+  }
+  
+  .product-card-skeleton {
+    background: linear-gradient(90deg, #3A3A3C 25%, #2C2C2E 50%, #3A3A3C 75%);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .product-card {
+    box-shadow: none;
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+  
+  .product-actions {
+    display: none;
+  }
+  
+  .product-out-of-stock {
+    display: none;
+  }
+}

@@ -3,7 +3,9 @@ floral-shop-app/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── Nav.jsx             # Navigation bar with search, auth, and cart visuals
-│   │   │   ├── ProductCard.jsx     # Reusable product card for Home/Search
+│   │   │   ├── ProductCard/        
+│   │   │   |   ├── ProductCard.jsx     
+│   │   │   |   ├── ProductCard.css    
 │   │   │   └── Search.jsx          # Search component with styled input and product cards
 │   │   │   └── Subscribe.jsx       # Subscribe component 
 │   │   ├── context/
