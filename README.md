@@ -161,3 +161,8 @@ MERN STACK floral-shop-app/
 │   └── verifyPassword.js            
 ├── .gitignore                      
 └── README.md                     
+
+
+Button BG: #007AFF
+cart bg #deedfe
+cart icon color: #1D1D1F

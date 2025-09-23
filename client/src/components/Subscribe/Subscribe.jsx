@@ -45,22 +45,11 @@ function Subscribe() {
   return (
     <section className="subscribe-section">
       <div className="subscribe-container">
-        {/* Decorative Elements */}
-        <div className="subscribe-decoration">
-          <span className="subscribe-flower flower-1">🌸</span>
-          <span className="subscribe-flower flower-2">🌺</span>
-          <span className="subscribe-flower flower-3">🌼</span>
-        </div>
+
 
         <div className="subscribe-card">
           <div className="subscribe-content">
-            <div className="subscribe-visual">
-              <div className="subscribe-illustration">
-                <span className="subscribe-flower main-flower">🌷</span>
-                <span className="subscribe-flower leaf-1">🍃</span>
-                <span className="subscribe-flower leaf-2">🍃</span>
-              </div>
-            </div>
+         
 
             <div className="subscribe-text">
               <h2 className="subscribe-title">
@@ -130,7 +119,15 @@ function Subscribe() {
               </form>
             </div>
           </div>
+ 
         </div>
+                         {/* Decorative Elements=
+        <div className="subscribe-decoration">
+          <span className="subscribe-flower flower-1">🌸</span>
+          <span className="subscribe-flower flower-2">🌺</span>
+          <span className="subscribe-flower flower-3">🌼</span>
+        </div>
+         */}
       </div>
     </section>
   );
