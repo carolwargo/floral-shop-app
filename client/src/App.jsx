@@ -13,7 +13,8 @@ import Search from './components/Search/Search';
 import Nav from './components/Nav/Nav';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
-import Test from './pages/Test';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import Test from './pages/Test/Test'
 
 function App() {
   return (
@@ -22,7 +23,6 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -33,6 +33,7 @@ function App() {
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/search" element={<Search />} />
+          <Route path='/test' element={<Test/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

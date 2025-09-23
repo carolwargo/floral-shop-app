@@ -1,4 +1,4 @@
-//client/src/pages/ProductDetail.jsx  
+//client/src/pages/ProductDetail/ProductDetail.jsx  
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -29,9 +29,7 @@ function ProductDetail() {
   }, [id]);
 
   const handleAddToCart = async () => {
-    // Replace with actual cart logic
     try {
-      // You can integrate with your AuthContext addToCart here
       alert(`${product.name} added to cart!`);
     } catch (error) {
       console.error('Add to cart error:', error);
@@ -39,20 +37,29 @@ function ProductDetail() {
   };
 
   if (loading) {
-    return <div className="product-detail-loading">Loading...</div>;
+    return (
+      <div className="product-detail-container">
+        <div className="product-detail-loading">
+          <div className="product-detail-loading-spinner"></div>
+          <p className="product-detail-loading-text">Loading product details...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error || !product) {
     return (
       <div className="product-detail-container">
-        <div className="product-detail-error">
-          <p>{error || 'Product not found'}</p>
-          <button 
-            onClick={() => navigate('/shop')} 
-            className="product-detail-back-button"
-          >
-            Back to Shop
-          </button>
+        <div className="product-detail-error-container">
+          <div className="product-detail-error">
+            <p>{error || 'Product not found'}</p>
+            <button 
+              onClick={() => navigate('/shop')} 
+              className="product-detail-back-button"
+            >
+         Continue Shopping
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -61,7 +68,6 @@ function ProductDetail() {
   return (
     <div className="product-detail-container">
       <div className="product-detail-card">
-        {/* Fixed Image with Fallback */}
         <img
           src={product.image || 'https://placekitten.com/400/300'} 
           alt={product.name || 'Product image'}
@@ -73,27 +79,36 @@ function ProductDetail() {
         
         <div className="product-detail-content">
           <h2 className="product-detail-title">{product.name}</h2>
-          <p className="product-detail-price">${product.price.toFixed(2)}</p>
-          <p className="product-detail-description">
+      <p className="product-detail-description">
             {product.description || 'No description available'}
           </p>
           <p className="product-detail-stock">In Stock: {product.stock}</p>
-          
+                               <p className="product-detail-price">${product.price.toFixed(2)}</p>
+           
           <div className="product-detail-button-group">
-            <button 
+           
+
+       
+    
+          </div>
+           <button 
               onClick={handleAddToCart} 
-              className="product-detail-add-button"
+              className="product-detail-back-button"
               disabled={product.stock === 0}
             >
-              {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+              <span className="button-content">
+                <span className="button-text">
+                  {product.stock === 0 ? 'Out of Stock' : 'Buy Now'}
+                </span>
+              </span>
             </button>
-            <button 
+                       
+<a className='product-detail-back-link'
               onClick={() => navigate('/shop')} 
-              className="product-detail-back-button"
             >
-              Back to Shop
-            </button>
-          </div>
+              <i></i>
+             Continue Shopping
+            </a>
         </div>
       </div>
     </div>
