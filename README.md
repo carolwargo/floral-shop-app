@@ -166,3 +166,7 @@ MERN STACK floral-shop-app/
 Button BG: #007AFF
 cart bg #deedfe
 cart icon color: #1D1D1F
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+  integrity="sha512-Hd9mw2+Y0AQtLMdyfK3X5VtBqR8YFZQk+zKQ6iPpW5HhCkKo5L9sM4nDq4sB3d74iLKeShNbyPdbY4w/30BxVQ==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />

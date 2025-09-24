@@ -13,8 +13,7 @@ import Search from './components/Search/Search';
 import Nav from './components/Nav/Nav';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import Test from './pages/Test/Test'
+
 
 function App() {
   return (
@@ -33,7 +32,6 @@ function App() {
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/search" element={<Search />} />
-          <Route path='/test' element={<Test/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

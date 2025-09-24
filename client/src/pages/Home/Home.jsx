@@ -1,4 +1,5 @@
 // client/src/pages/Home.jsx - NO INLINE STYLES
+// client/src/pages/Home.jsx - NO INLINE STYLES
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
