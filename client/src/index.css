@@ -3,7 +3,10 @@
 :root {
   --blackRussian: #1f1f26;
   --greyWhite: #f9f9f9;
-  --pacificBlue: #1ca9c9;
+  --pacificBlue: #c3f2fc;
+    --medBlue: #1ebcfb;
+  --medPurple: #f308e7;
+  --lightPurple: #ff76f8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -64,7 +67,7 @@ h4 { font-size: 1.5rem; margin-bottom: 0.875rem; }
 }
 
 /* Buttons */
-/*
+
 .button {
   background-color: #007AFF;
   color: #FFFFFF;
@@ -121,11 +124,10 @@ h4 { font-size: 1.5rem; margin-bottom: 0.875rem; }
   min-height: 36px;
   letter-spacing: 0.01em;
 }
-*/
 
 
 /* Links */
-/*
+
 .link {
   color: #007AFF;
   text-decoration: none;
@@ -138,7 +140,7 @@ h4 { font-size: 1.5rem; margin-bottom: 0.875rem; }
   color: #0056CC;
   text-decoration: underline;
 }
-*/
+
 
 /* Images */
 /*

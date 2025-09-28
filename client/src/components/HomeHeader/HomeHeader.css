@@ -1,6 +1,4 @@
 /* header */
-
-
 /* Hero Section */
 .home-hero {
   position: relative;
@@ -25,16 +23,16 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   color: #1D1D1F;
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
 .home-hero-subtitle {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   color: #6D6D72;
   margin: 0 0 24px 0; /* Reduced margin */
-  line-height: 1.3; /* Aligned with Nav.css */
+  line-height: 1.5; /* Aligned with Nav.css */
   font-weight: 400;
   max-width: 500px;
 }
@@ -42,9 +40,10 @@
 .home-hero-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   padding: 12px 24px; /* Reduced padding */
-  background-color: var(--pacificBlue);
+  background-color: var(--blackRussian);
   color: #FFFFFF;
   text-decoration: none;
   border-radius: 12px;
@@ -55,10 +54,9 @@
   letter-spacing: 0.015em;
   position: relative;
   overflow: hidden;
+  text-align: center;
   min-height: 48px; /* Reduced height */
 }
-
-
 
 .home-hero-button:hover {
   background-color: #0077b6; /* Darker shade of --pacificBlue */
@@ -71,14 +69,14 @@
   box-shadow: 0 4px 12px rgba(28, 169, 201, 0.3);
 }
 
-
-/* title 
+ title 
 .title{
     margin: 30px 0;
 }
 .title h4{
     text-transform: uppercase;
 }
+
 .title h2{
     text-transform: capitalize;
     font-size: 28px;
@@ -86,5 +84,28 @@
     font-family: 'Fira Sans', sans-serif;
     padding: 5px 0;
 }
-    */
+    
 /*********/
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .home-hero {
+    min-height: 60vh;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 0; /* Reduced padding */
+  }
+  
+  .home-hero-content {
+    padding: 32px 24px;
+    max-width: none;
+  }
+  
+  .home-hero-image {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Reduced height */
+    align-self: stretch;
+  }
+}

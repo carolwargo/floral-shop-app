@@ -168,25 +168,7 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .home-hero {
-    min-height: 70vh;
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 0; /* Reduced padding */
-  }
-  
-  .home-hero-content {
-    padding: 32px 24px;
-    max-width: none;
-  }
-  
-  .home-hero-image {
-    position: relative;
-    width: 100%;
-    height: 250px; /* Reduced height */
-    align-self: stretch;
-  }
-  
+
   .home-featured-section,
   .home-newsletter-section {
     padding: 40px 0;
@@ -296,100 +278,5 @@
   .home-loading-container {
     padding: 24px 12px;
     min-height: 40vh;
-  }
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .home-container {
-    background-color: var(--blackRussian);
-    color: #F5F5F7;
-  }
-  
-  .home-hero {
-    background: linear-gradient(135deg, transparent, rgba(28, 169, 201, 0.2) 100%);
-  }
-  
-  .home-hero::before {
-    opacity: 0.3;
-  }
-  
-  .home-hero-title {
-    color: #F5F5F7;
-  }
-  
-  .home-hero-subtitle {
-    color: #AEAEB2;
-  }
-  
-  .home-hero-button {
-    background-color: var(--pacificBlue);
-  }
-  
-  .home-hero-button:hover {
-    background-color: #0077b6;
-  }
-  
-  .home-empty {
-    background-color: #2C2C2E;
-    color: #AEAEB2;
-  }
-  
-  .home-hero-image {
-    opacity: 0.05;
-  }
-  
-  .home-featured-section {
-    background-color: #2C2C2E;
-  }
-  
-  .home-section-title {
-    color: #F5F5F7;
-  }
-  
-  .home-section-view-all {
-    color: var(--pacificBlue);
-  }
-  
-  .home-section-view-all:hover {
-    background-color: rgba(28, 169, 201, 0.15);
-  }
-  
-  .home-error {
-    background-color: #2C2C2E;
-    border-color: #48484A;
-    color: #FF6B6B;
-  }
-  
-  .home-loading-text {
-    color: #AEAEB2;
-  }
-  
-  .home-newsletter-section {
-    background: linear-gradient(135deg, transparent, rgba(28, 169, 201, 0.2) 100%);
-  }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  .home-hero-button,
-  .home-hero-flower,
-  .home-loading-spinner {
-    animation: none;
-    transition: none;
-  }
-  
-  .home-hero-button:hover,
-  .home-section-view-all:hover {
-    transform: none;
-  }
-}
-
-/* High Contrast */
-@media (prefers-contrast: high) {
-  .home-hero-button,
-  .home-section-view-all,
-  .home-error-button {
-    border: 2px solid;
   }
 }

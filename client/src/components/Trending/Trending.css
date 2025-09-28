@@ -1,0 +1,50 @@
+/* trend */
+.trend-item{
+    background: var(--greyWhite);
+    margin: 40px 0;
+    padding: 30px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all 0.3s ease-in-out;
+}
+.trend-item:hover{
+    -webkit-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
+    -moz-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
+    box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
+}
+.trend-item:nth-child(3) img{
+    width: 50%;
+    margin: 0 auto;
+}
+.trend-item-content{
+    padding: 16px 0;
+    line-height: 1.9;
+}
+.trend-item-content h4:first-of-type{
+    font-size: 22px;
+    font-family: 'Fira Sans', sans-serif;
+    opacity: 0.8;
+}
+.trend-item-content h4:last-of-type{
+    font-weight: 600;
+    font-size: 20px;
+}
+.chevron-icon{
+    background: var(--blackRussian);
+    color: #fff;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 16px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.4s ease-in-out;
+}
+.chevron-icon:hover{
+    background: var(--pacificBlue);
+}

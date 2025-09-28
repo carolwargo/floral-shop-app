@@ -10,7 +10,7 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import ProductDetail from './pages/ProductDetails/ProductDetail';
 import Contact from './pages/Contact/Contact';
 import Search from './components/Search/Search';
-import HomeHeader from './components/HomeHeader/HomeHeader';  
+
 import { AuthProvider } from './context/AuthContext';
 import Nav from './components/Nav/Nav';
 
@@ -22,7 +22,6 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Nav />
-        <HomeHeader />
         <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />

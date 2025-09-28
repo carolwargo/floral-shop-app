@@ -5,6 +5,7 @@ import axios from 'axios';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Subscribe from '../../components/Subscribe/Subscribe';
 import './Home.css'; // ← ADD THIS IMPORT
+import HomeHeader from '../../components/HomeHeader/HomeHeader'; // ← ADD THIS IMPORT
 //import HeaderImage from '../../assets/images/HeaderImage.png'; // ← ADD THIS IMPORT
 
 function Homepage() {
@@ -43,6 +44,8 @@ function Homepage() {
   }
 
   return (
+    <div>
+      <HomeHeader />
     <main className="home-hero-container"> {/* ✅ Fixed: was "home-main" */}
   
 
@@ -89,6 +92,7 @@ function Homepage() {
         <Subscribe />
       </section>
     </main>
+    </div>
   );
 }
 
