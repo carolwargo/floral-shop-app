@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Subscribe from '../../components/Subscribe/Subscribe';
-import './Home.css'; // ← ADD THIS IMPORT
+import './Home.css'; 
 import HomeHeader from '../../components/HomeHeader/HomeHeader'; // ← ADD THIS IMPORT
-//import HeaderImage from '../../assets/images/HeaderImage.png'; // ← ADD THIS IMPORT
+import Trending from '../../components/Trending/Trending';
 
 function Homepage() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -46,19 +46,18 @@ function Homepage() {
   return (
     <div>
       <HomeHeader />
-    <main className="home-hero-container"> {/* ✅ Fixed: was "home-main" */}
-  
 
       {/* Featured Products */}
       <section className="home-featured-section"> {/* ✅ Fixed: was "home-featured" */}
         <div className="home-section-container"> {/* ✅ Fixed: was "home-section-wrapper" */}
           <header className="home-section-header">
             <h2 className="home-section-title">Featured Bouquets</h2>
+            
             <Link to="/shop" className="home-section-view-all"> {/* ✅ Fixed: was "home-section-more" */}
               View All →
             </Link>
           </header>
-          
+          <Trending />
           {error ? (
             <div className="home-error"> {/* ✅ Fixed: was "home-error-state" */}
               <p className="home-error-message">{error}</p> {/* ✅ Fixed: was "home-error-text" */}
@@ -91,7 +90,6 @@ function Homepage() {
       <section className="home-newsletter-section"> {/* ✅ Fixed: was "home-newsletter" */}
         <Subscribe />
       </section>
-    </main>
     </div>
   );
 }
