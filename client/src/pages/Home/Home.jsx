@@ -1,11 +1,11 @@
-// client/src/pages/Home.jsx - NO INLINE STYLES
-// client/src/pages/Home.jsx - NO INLINE STYLES
+// client/src/pages/Home.jsx 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Subscribe from '../../components/Subscribe/Subscribe';
 import './Home.css'; // ← ADD THIS IMPORT
+//import HeaderImage from '../../assets/images/HeaderImage.png'; // ← ADD THIS IMPORT
 
 function Homepage() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -43,22 +43,8 @@ function Homepage() {
   }
 
   return (
-    <main className="home-container"> {/* ✅ Fixed: was "home-main" */}
-      {/* Hero Section */}
-      <section className="home-hero">
-        <div className="home-hero-content">
-          <h1 className="home-hero-title">Welcome to Floral Shop</h1>
-          <p className="home-hero-subtitle">Discover the Beauty of Fresh Flowers</p>
-          <Link to="/shop" className="home-hero-button"> {/* ✅ Fixed: was "home-hero-cta" */}
-            Explore Collection
-          </Link>
-        </div>
-        <div className="home-hero-visual"> {/* ✅ Added - this was missing */}
-          <div className="home-hero-placeholder">
-            <span className="home-hero-flower">🌸</span>
-          </div>
-        </div>
-      </section>
+    <main className="home-hero-container"> {/* ✅ Fixed: was "home-main" */}
+  
 
       {/* Featured Products */}
       <section className="home-featured-section"> {/* ✅ Fixed: was "home-featured" */}

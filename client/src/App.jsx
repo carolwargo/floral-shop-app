@@ -10,16 +10,20 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import ProductDetail from './pages/ProductDetails/ProductDetail';
 import Contact from './pages/Contact/Contact';
 import Search from './components/Search/Search';
-import Nav from './components/Nav/Nav';
+import HomeHeader from './components/HomeHeader/HomeHeader';  
 import { AuthProvider } from './context/AuthContext';
-import './App.css';
+import Nav from './components/Nav/Nav';
+
 
 
 function App() {
   return (
+
     <AuthProvider>
       <BrowserRouter>
         <Nav />
+        <HomeHeader />
+        <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
@@ -33,6 +37,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/search" element={<Search />} />
         </Routes>
+        </div>
       </BrowserRouter>
     </AuthProvider>
   );

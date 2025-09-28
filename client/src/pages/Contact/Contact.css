@@ -6,7 +6,6 @@
   background-color: #F5F5F7; /* Matches Home.css */
   color: #1D1D1F;
   min-height: calc(100vh - 120px);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
 }
 
 .contact-card {
