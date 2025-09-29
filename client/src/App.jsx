@@ -10,7 +10,7 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import ProductDetail from './pages/ProductDetails/ProductDetail';
 import Contact from './pages/Contact/Contact';
 import Search from './components/Search/Search';
-
+import Test from './pages/Test/Test';
 import { AuthProvider } from './context/AuthContext';
 import Nav from './components/Nav/Nav';
 
@@ -35,6 +35,7 @@ function App() {
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
         </div>
       </BrowserRouter>

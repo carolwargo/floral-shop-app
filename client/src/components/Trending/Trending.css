@@ -2,7 +2,7 @@
 /* trend */
 .trend-item{
     background: var(--greyWhite);
-    margin: 40px 0;
+    margin: 30px 0;
     padding: 30px 24px;
     text-align: center;
     display: flex;
@@ -23,12 +23,6 @@
   display: block;
   margin: 0 auto;
 }
-
-/* remove this — it's causing the tiny 3rd image */
-/* .trend-item:nth-child(3) img {
-    width: 50%;
-    margin: 0 auto;
-} */
 
 .trend-item-content{
     padding: 16px 0;
@@ -76,4 +70,18 @@
   .trend-item {
     flex: 1;
   }
+}
+
+@media screen and (max-width: 768px) {
+    .trend-item{
+        margin: 20px 0;
+        padding: 20px 12px;
+    }
+    .trend-item-content h4:first-of-type{
+        font-size: 18px;
+    }
+    .trend-item-content h4:last-of-type{
+        font-size: 16px;
+    }
+    
 }

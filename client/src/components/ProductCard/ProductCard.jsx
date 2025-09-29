@@ -1,5 +1,4 @@
 // components/ProductCard/ProductCard.jsx
-// components/ProductCard/ProductCard.jsx
 import { Link } from 'react-router-dom';
 import './ProductCard.css'; // Import the CSS file
 
