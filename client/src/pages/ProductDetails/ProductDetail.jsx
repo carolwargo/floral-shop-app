@@ -59,6 +59,7 @@ function ProductDetail() {
             >
          Continue Shopping
             </button>
+            
           </div>
         </div>
       </div>
@@ -66,7 +67,7 @@ function ProductDetail() {
   }
 
   return (
-    <div className="product-detail-container">
+    <div className="container">
       <div className="product-detail-card">
         <img
           src={product.image || 'https://placekitten.com/400/300'} 
@@ -78,37 +79,43 @@ function ProductDetail() {
         />
         
         <div className="product-detail-content">
+           <h2 className="product-detail-title-header">Featured Item</h2>
           <h2 className="product-detail-title">{product.name}</h2>
+      <p className="product-detail-price">${product.price.toFixed(2)}</p> 
+        
+     
       <p className="product-detail-description">
             {product.description || 'No description available'}
           </p>
-          <p className="product-detail-stock">In Stock: {product.stock}</p>
-                               <p className="product-detail-price">${product.price.toFixed(2)}</p>
-           
-          <div className="product-detail-button-group">
-           
 
-       
-    
-          </div>
-           <button 
+
+           <div className="product-detail-meta">
+              <p className="product-detail-stock">In Stock: {product.stock}</p>
+ <button 
               onClick={handleAddToCart} 
-              className="product-detail-back-button"
+              className="product-detail-add-button"
               disabled={product.stock === 0}
             >
               <span className="button-content">
                 <span className="button-text">
-                  {product.stock === 0 ? 'Out of Stock' : 'Buy Now'}
+                  {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                 </span>
               </span>
             </button>
-                       
+                                              
+
+
 <a className='product-detail-back-link'
               onClick={() => navigate('/shop')} 
             >
-              <i></i>
+              <i className="fa fa-arrow-left"></i>
              Continue Shopping
             </a>
+</div>
+    
+   
+
+
         </div>
       </div>
     </div>

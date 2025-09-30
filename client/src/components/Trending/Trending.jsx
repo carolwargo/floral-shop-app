@@ -12,9 +12,8 @@ function Trending() {
 {/* trending product */}
       <div className = "container">
         <div className = "title">
-                {/**       <h4>trending now</h4>
-          <h2>best selling product</h2>*/}
-    
+         <h4>trending now</h4>
+          <h2>best selling product</h2>
         </div>
 
         <div className = "trend-grid">
@@ -22,21 +21,20 @@ function Trending() {
           <div className = "trend-item">
             <img src ={Flower1} alt = "flower1"/>
             <div className = "trend-item-content">
-                   <h4>Peach & Plum</h4>
-              <h4>$60.00</h4>
+                   <h4 className='trend-item-title'>Peach & Plum</h4>
+              <h4 className='trend-item-price'>$60.00</h4>
         <div className="stars">
-        <span><FontAwesomeIcon icon={solidStar} /></span>
-        <span><FontAwesomeIcon icon={solidStar} /></span>
-        <span><FontAwesomeIcon icon={solidStar} /></span>
-        <span><FontAwesomeIcon icon={solidStar} /></span>
-        <span><FontAwesomeIcon icon={regularStar} /></span>
-      </div>
+<p className='trend-item-description'></p></div>
       <span className="chevron-icon">
         <FontAwesomeIcon icon={faChevronRight} />
       </span>
             </div>
           </div>
       {/*end of item */}
+
+
+
+
       {/*item */}
           <div className = "trend-item">
             <img src ={Flower2} alt = "flower2"/>

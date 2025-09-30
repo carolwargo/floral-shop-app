@@ -1,4 +1,5 @@
 // components/ProductCard/ProductCard.jsx
+// components/ProductCard/ProductCard.jsx
 import { Link } from 'react-router-dom';
 import './ProductCard.css'; // Import the CSS file
 
@@ -32,17 +33,19 @@ function ProductCard({ product, onAddToCart }) {
         <h3 className="product-title">{product.name}</h3> {/* ✅ Matches CSS */}
         <p className="product-price">
           ${parseFloat(product.price || 0).toFixed(2)}
+          
         </p> {/* ✅ Matches CSS */}
         <p className="product-description">
           {product.description || 'Beautiful floral arrangement'}
         </p> 
+    
         <div className="product-actions">
           <button 
             onClick={() => onAddToCart(product)} 
-            className={`product-button product-button-primary ${isOutOfStock ? 'disabled' : ''}`} 
+            className={`product-button product-button-secondary ${isOutOfStock ? 'disabled' : ''}`} 
             disabled={isOutOfStock}
           >
-            {isOutOfStock ? 'Sold Out' : 'Add to Cart'}
+            {isOutOfStock ? 'Sold Out' : '+ Add To Cart'}
           </button>
           <Link 
             to={`/product/${product._id}`} 

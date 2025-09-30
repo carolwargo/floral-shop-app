@@ -1,43 +1,44 @@
 /* components/ProductCard/ProductCard.css - ENHANCED Apple Design - More Pronounced */
+/* Add this to ProductCard.css or a parent stylesheet */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem; /* space between cards */
+  width: 100%;
+  margin-top: 2rem;
+}
+
+
+
 .product-card {
-     background: var(--greyWhite);
-    margin: 40px 0;
+    background: var(--greyWhite);
+    margin: 30px 0;
     padding: 30px 24px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     transition: all 0.3s ease-in-out;
+    border-radius: 12px; /* More rounded corners */
+    border: 1px solid #E0E0E0; /* Subtle border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 .product-card:hover {
-  transform: translateY(-4px); /* More lift */
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7); /* Stronger hover shadow */
-}
+     -webkit-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
+    -moz-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
+    box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
 
-.product-image-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: linear-gradient(135deg, #F5F5F7 0%, #E8F0FE 100%); /* Subtle gradient */
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0;
-  display: block;
-  box-sizing: border-box;
 }
 
 .product-image {
-  width: 100%;
+   width: 100%;
   height: auto;
   object-fit: contain;
   display: block;
   margin: 0 auto;
 }
 
-.product-card:hover .product-image {
-  transform: scale(1.05); /* More zoom */
-}
 
 .product-out-of-stock {
   position: absolute;
@@ -58,66 +59,34 @@
 }
 
 .product-content {
-  padding: 16px 0;
-    line-height: 1.9;
+      padding: 16px 0;
+    line-height: 1.6;
 }
 
 .product-title {
-  font-size: 1.25rem; /* Slightly larger */
-  font-weight: 700; /* Bolder for impact */
-  color: #1D1D1F;
-  margin: 0 0 12px 0;
-  line-height: 1.2;
-  min-height: 1.5rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  padding: 0;
-  text-align: left;
-  letter-spacing: -0.01em;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  box-sizing: border-box;
+    font-size: 22px;
+    font-family: 'Fira Sans', sans-serif;
+    opacity: 0.8;
 }
 
 .product-price {
-  font-size: 1.5rem; /* Larger, more prominent */
-  font-weight: 700; /* Bolder */
-  color: #007AFF;
-  margin: 0 0 16px 0;
-  min-height: 1.8rem;
-  line-height: 1.1;
-  padding: 0;
-  text-align: left;
-  letter-spacing: -0.015em;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  box-sizing: border-box;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .product-description {
-  font-size: 0.9375rem; /* Slightly larger */
-  color: #6D6D72;
-  line-height: 1;
-  margin: 0 0 5px 0;
-  min-height: 3rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  padding: 0;
-  text-align: left;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  box-sizing: border-box;
+     font-size: 12px;
+    color: var(--blackRussian);
+    opacity: 0.7;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    min-height: 3.6rem; /* Ensure consistent height */
 }
 
 .product-actions {
-  margin-top: auto;
   display: flex;
   gap: 12px; /* More space */
   flex-shrink: 0;
-  min-height: 24px; /* Taller buttons for premium feel */
   padding: 0;
   margin: 0;
   width: 100%;
@@ -139,19 +108,13 @@
   transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  letter-spacing: 0.015em;
   position: relative;
   overflow: hidden;
-  margin: 0;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 0.8rem;
 }
 
 .product-button-primary {
-  background-color: #007AFF;
-  color: #FFFFFF;
+  background-color: transparent;
+  color: #007AFF;
 }
 
 .product-button-primary:hover:not(:disabled) {
@@ -298,45 +261,6 @@
   }
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .product-card {
-    background-color: #2C2C2E;
-    border-color: #3A3A3C;
-    color: #F5F5F7;
-  }
-  
-  .product-image-container {
-    background-color: #1C1C1E;
-  }
-  
-  .product-title {
-    color: #F5F5F7;
-  }
-  
-  .product-description {
-    color: #AEAEB2;
-  }
-  
-  .product-button-secondary {
-    background-color: #3A3A3C;
-    color: #F5F5F7;
-    border-color: #48484A;
-  }
-  
-  .product-button-primary:disabled {
-    background-color: #48484A;
-  }
-  
-  .product-card-loading {
-    background-color: #3A3A3C;
-    color: #AEAEB2;
-  }
-  
-  .product-card-skeleton {
-    background: linear-gradient(90deg, #3A3A3C 25%, #2C2C2E 50%, #3A3A3C 75%);
-  }
-}
 
 /* Print Styles */
 @media print {

@@ -48,7 +48,7 @@ function FeaturedTest() {
  return (
  <div>
   {/* featured product */}
-    <section className= "featured">
+    <div className= "featured">
       <div className= "container">
       {/* item */}
         <div className= "featured-item">
@@ -92,6 +92,9 @@ function FeaturedTest() {
           </div>
         </div>
       {/* end of item */}
+
+
+      
       {/* item */}
         <div className= "featured-item">
           <div className= "featured-item-img">
@@ -135,7 +138,7 @@ function FeaturedTest() {
         </div>
       {/* end of item */}
       </div>
-    </section>
+    </div>
   {/* end of featured product */}
  </div>
   

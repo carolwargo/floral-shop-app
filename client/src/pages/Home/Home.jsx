@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Subscribe from '../../components/Subscribe/Subscribe';
-import './Home.css'; 
-import HomeHeader from '../../components/HomeHeader/HomeHeader'; // ← ADD THIS IMPORT
-import Trending from '../../components/Trending/Trending';
+//import './Home.css'; // ← ADD THIS IMPORT
+import HeaderTest from '../../components/Test/HeaderTest';
 
 function Homepage() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -44,12 +43,19 @@ function Homepage() {
   }
 
   return (
-    <div>
-      <HomeHeader />
-
+ <div>
+    <header className= "header">
+<HeaderTest />
+    </header>
+  {/* end of header */}
       {/* Featured Products */}
-      <section className="home-featured-section"> {/* ✅ Fixed: was "home-featured" */}
-        <div className="home-section-container"> {/* ✅ Fixed: was "home-section-wrapper" */}
+            <div className = "container">
+        <div className = "title">
+         <h4>trending now</h4>
+          <h2>best selling product</h2>
+        </div>
+     
+ <div className="home-section-container"> {/* ✅ Fixed: was "home-section-wrapper" */}
           <header className="home-section-header">
             <h2 className="home-section-title">Featured Bouquets</h2>
             
@@ -57,7 +63,7 @@ function Homepage() {
               View All →
             </Link>
           </header>
-          <Trending />
+          
           {error ? (
             <div className="home-error"> {/* ✅ Fixed: was "home-error-state" */}
               <p className="home-error-message">{error}</p> {/* ✅ Fixed: was "home-error-text" */}
@@ -73,23 +79,24 @@ function Homepage() {
               <p className="home-empty-message">No featured products yet</p> {/* ✅ Fixed: was "home-empty-text" */}
             </div>
           ) : (
-            <div className="home-featured-grid">
-              {featuredProducts.map((product) => (
-                <ProductCard 
-                  key={product._id} 
-                  product={product} 
-                  onAddToCart={handleAddToCart} 
-                />
+  <div className="product-grid">
+  {featuredProducts.map((product) => (
+    <ProductCard 
+      key={product._id} 
+      product={product} 
+      onAddToCart={handleAddToCart} 
+    />
               ))}
             </div>
           )}
         </div>
-      </section>
-
+     
+   </div>
       {/* Newsletter */}
       <section className="home-newsletter-section"> {/* ✅ Fixed: was "home-newsletter" */}
         <Subscribe />
       </section>
+
     </div>
   );
 }
