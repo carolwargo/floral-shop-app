@@ -91,7 +91,8 @@ display: none;
 .nav-admin-link {
   text-decoration: underline;
   color: var(--blackRussian);
-  font-weight: 500;
+  font-weight: 400;
+  font-size: .875rem;
 }
 
 .nav-admin-link:hover {
@@ -107,7 +108,8 @@ display: none;
 .nav-link {
   text-decoration: none;
   color: var(--blackRussian);
-  font-weight: 500;
+  font-weight: 400;
+  font-size: .875rem;
 }
 
 .nav-link:hover {
@@ -118,6 +120,10 @@ display: none;
 .nav-cart-link {
   position: relative;
 }
+
+.nav-cart-link:hover {
+  color: var(--medPurple);
+} 
 
 .nav-cart-badge {
   position: absolute;
@@ -137,16 +143,26 @@ display: none;
   gap: 1rem;
 }
 
- .nav-auth-button {
-  background: var(--pacificBlue);
-  color: var(--blackRussian);
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+.nav-auth-button {
+  background: linear-gradient(90deg,#bd00ff, #ec00ff,#ff00ed);
+  color: #fff;
+  padding: 0.2rem 0.8rem;
+  border-radius: 50px;
   cursor: pointer;
   font-weight: 500;
-  border: 1px solid transparent;
+  font-size: 0.75rem;
+  border: 2px solid #ec00ff; /* subtle purple outline */
   text-decoration: none;
+  transition: all 0.3s ease;
 }
+
+/* Hover effect */
+.nav-auth-button:hover {
+  background: transparent;
+  color: #ec00ff; /* falls back to the outline color */
+  border: 2px solid #ec00ff;
+}
+
 
 .nav-logout-button {
   background: transparent;

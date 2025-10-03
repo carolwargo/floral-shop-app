@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Shop from './pages/Shop/Shop';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
@@ -13,6 +13,8 @@ import Search from './components/Search/Search';
 import Test from './pages/Test/Test';
 import { AuthProvider } from './context/AuthContext';
 import Nav from './components/Nav/Nav';
+import ForgotPassword from './pages/ForgotPassword'; 
+import ResetPassword from './pages/ResetPassword/ResetPassword';
 
 
 
@@ -36,6 +38,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/search" element={<Search />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>
         </div>
       </BrowserRouter>

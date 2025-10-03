@@ -13,25 +13,22 @@ export const AuthProvider = ({ children }) => {
   const isTokenExpired = (token) => {
     try {
       const decoded = jwtDecode(token);
-      console.log('Decoded JWT:', decoded); // Debug
       return decoded.exp * 1000 < Date.now();
     } catch {
       return true;
     }
   };
 
+  // LOGIN
   const login = async (email, password) => {
     try {
       setError(null);
       const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
       const { token } = res.data;
-      console.log('Login token:', token);
       localStorage.setItem('token', token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const decoded = jwtDecode(token);
-      console.log('Decoded JWT on login:', decoded); // Debug
       setUser({ name: decoded.name || email, email, isAdmin: decoded.isAdmin || false });
-      console.log('User set:', { name: decoded.name || email, email, isAdmin: decoded.isAdmin || false });
       await fetchCart(token);
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
@@ -39,10 +36,27 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // SIGNUP
+  const signup = async (email, password, name) => {
+    try {
+      setError(null);
+      const res = await axios.post('http://localhost:5000/api/auth/register', { email, password, name });
+      const { token } = res.data;
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const decoded = jwtDecode(token);
+      setUser({ name: decoded.name || name, email, isAdmin: decoded.isAdmin || false });
+      await fetchCart(token);
+    } catch (err) {
+      setError(err.response?.data?.error || 'Signup failed');
+      console.error('Signup error:', err);
+    }
+  };
+
+  // FETCH CART
   const fetchCart = async (token) => {
     try {
       const authToken = token || localStorage.getItem('token');
-      console.log('Fetching cart with token:', authToken);
       if (!authToken || isTokenExpired(authToken)) {
         throw new Error('No valid token found');
       }
@@ -61,23 +75,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token && !isTokenExpired(token)) {
-      console.log('Initial token:', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const decoded = jwtDecode(token);
-      console.log('Decoded JWT on init:', decoded); // Debug
-      setUser({ name: decoded.name || decoded.email, email: decoded.email, isAdmin: decoded.isAdmin || false });
-      console.log('Initial user set:', { name: decoded.name || decoded.email, email: decoded.email, isAdmin: decoded.isAdmin || false });
-      fetchCart(token);
-    } else if (token) {
-      console.log('Removing expired token:', token);
-      localStorage.removeItem('token');
-      delete axios.defaults.headers.common['Authorization'];
-    }
-  }, []);
-
+  // LOGOUT
   const logout = () => {
     localStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
@@ -86,11 +84,25 @@ export const AuthProvider = ({ children }) => {
     setError(null);
   };
 
-  // Compute cart item count
+  // INITIALIZE USER
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token && !isTokenExpired(token)) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const decoded = jwtDecode(token);
+      setUser({ name: decoded.name || decoded.email, email: decoded.email, isAdmin: decoded.isAdmin || false });
+      fetchCart(token);
+    } else if (token) {
+      localStorage.removeItem('token');
+      delete axios.defaults.headers.common['Authorization'];
+    }
+  }, []);
+
+  // CART ITEM COUNT
   const cartItemsCount = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
 
   return (
-    <AuthContext.Provider value={{ user, cart, cartItemsCount, error, login, logout, fetchCart }}>
+    <AuthContext.Provider value={{ user, cart, cartItemsCount, error, login, logout, signup, fetchCart }}>
       {children}
     </AuthContext.Provider>
   );

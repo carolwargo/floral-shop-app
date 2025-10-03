@@ -62,6 +62,16 @@ function Nav() {
           <li><Link to="/shop" className="nav-link" onClick={closeMenu}>Shop</Link></li>
           <li><Link to="/about" className="nav-link" onClick={closeMenu}>About</Link></li>
           <li><Link to="/contact" className="nav-link" onClick={closeMenu}>Contact</Link></li>
+  
+          {/* Cart (always visible) */}
+<li className="nav-cart">
+  <Link to="/cart" className="nav-link nav-cart-link" onClick={closeMenu}>
+    <FontAwesomeIcon icon={faShoppingCart} className="nav-cart-icon" />
+    {cartItemsCount > 0 && (
+      <span className="nav-cart-badge">{cartItemsCount}</span>
+    )}
+  </Link>
+</li>
 
           {/* ✅ Only show Admin Dashboard if user is admin */}
           {user?.isAdmin && (

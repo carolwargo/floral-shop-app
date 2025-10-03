@@ -55,7 +55,7 @@ function Homepage() {
           <h2>best selling product</h2>
         </div>
      
- <div className="home-section-container"> {/* ✅ Fixed: was "home-section-wrapper" */}
+ <section className="home-section-container"> {/* ✅ Fixed: was "home-section-wrapper" */}
           <header className="home-section-header">
             <h2 className="home-section-title">Featured Bouquets</h2>
             
@@ -89,7 +89,7 @@ function Homepage() {
               ))}
             </div>
           )}
-        </div>
+        </section>
      
    </div>
       {/* Newsletter */}
